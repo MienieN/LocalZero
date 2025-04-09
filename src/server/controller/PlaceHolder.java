@@ -1,4 +1,4 @@
-package server;
+package server.controller;
 
 public class PlaceHolder {
 }
