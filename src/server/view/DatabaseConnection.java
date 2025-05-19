@@ -1,4 +1,4 @@
-package server.view;
+package src.server.view;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-
     String databasePassword;
     Connection connection;
     public DatabaseConnection() {
