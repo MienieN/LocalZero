@@ -1,4 +1,4 @@
-package src.server.controller;
+package src.server.model.login;
 
 import java.io.Serializable;
 import java.security.MessageDigest;
