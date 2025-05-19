@@ -1,10 +1,10 @@
-package src.server;
+package server;
 
-import src.server.controller.UserLogInController;
-import src.server.model.login.ValidatePassword;
-import src.server.model.login.ValidateUsername;
-import src.server.view.DatabaseConnection;
-import src.shared.User;
+import server.controller.UserLogInController;
+import server.model.login.ValidatePassword;
+import server.model.login.ValidateUsername;
+import server.view.DatabaseConnection;
+import shared.User;
 
 import java.sql.SQLException;
 

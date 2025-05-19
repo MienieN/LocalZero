@@ -1,4 +1,4 @@
-package src.server.model.login;
+package server.model.login;
 
 public class ValidatePassword implements ValidateUsers {
     

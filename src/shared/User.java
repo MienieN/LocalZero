@@ -1,4 +1,4 @@
-package src.shared;
+package shared;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

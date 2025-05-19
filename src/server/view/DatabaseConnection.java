@@ -1,4 +1,4 @@
-package src.server.view;
+package server.view;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
