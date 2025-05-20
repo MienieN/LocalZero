@@ -1,8 +1,8 @@
 package server;
 
 import server.controller.UserLogInController;
-import server.model.login.ValidatePassword;
-import server.model.login.ValidateUsername;
+import server.model.login.handlers.PasswordValidationHandler;
+import server.model.login.handlers.UsernameValidationHandler;
 import server.view.DatabaseConnection;
 import shared.User;
 
@@ -11,14 +11,16 @@ import java.sql.SQLException;
 public class MainServer {
 
     public static void main(String[] args) {
+        
+        
         UserLogInController userLogInController = new UserLogInController();
         DatabaseConnection dbConnection = new DatabaseConnection();
-        ValidateUsername validateUsername = new ValidateUsername();
-        ValidatePassword validatePassword = new ValidatePassword();
+        UsernameValidationHandler usernameValidationHandler = new UsernameValidationHandler();
+        PasswordValidationHandler passwordValidationHandler = new PasswordValidationHandler();
         
         userLogInController.setDatabaseConnection(dbConnection)
-                .setValidateUsername(validateUsername)
-                        .setValidatePassword(validatePassword);
+                .setValidateUsername(usernameValidationHandler)
+                        .setValidatePassword(passwordValidationHandler);
         
         try {
             User user = userLogInController.loginUser("Abba", "Abba");
