@@ -6,12 +6,10 @@ import server.model.login.handlers.PasswordValidation;
 import server.model.login.handlers.RegisterNewUser;
 import server.model.login.handlers.UsernameValidation;
 import server.view.DatabaseConnection;
-import shared.User;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
-public class MainServer {
+public class LoginMainServer {
     public static void main (String[] args) {
         Scanner scanner = new Scanner(System.in);
         DatabaseConnection dbConnection = new DatabaseConnection();
