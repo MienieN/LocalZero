@@ -1,7 +1,7 @@
 package server.controller;
 
-import server.model.login.ValidatePassword;
-import server.model.login.ValidateUsername;
+import server.model.login.handlers.PasswordValidationHandler;
+import server.model.login.handlers.UsernameValidationHandler;
 import server.view.DatabaseConnection;
 import shared.User;
 
@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class UserLogInController {
     
-    private ValidateUsername validateUsername;
-    private ValidatePassword validatePassword;
+    private UsernameValidationHandler usernameValidationHandler;
+    private PasswordValidationHandler passwordValidationHandler;
     private DatabaseConnection databaseConnection;
     
  
@@ -21,8 +21,8 @@ public class UserLogInController {
     
     // TODO no nested loops
     public User loginUser(String username, String password) throws SQLException {
-        if (validateUsername.validate(username)) {
-            if (validatePassword.validate(password)) {
+        if (usernameValidationHandler.validate(username)) {
+            if (passwordValidationHandler.validate(password)) {
                 ResultSet resultSet = databaseConnection.getUserForLogin(username, password);
                 return new User(resultSet);
                 
@@ -38,13 +38,13 @@ public class UserLogInController {
     }
     
     // --- Setters ----------------------------------------------------------------------------------------------------
-    public UserLogInController setValidateUsername (ValidateUsername validateUsername) {
-        this.validateUsername = validateUsername;
+    public UserLogInController setValidateUsername (UsernameValidationHandler usernameValidationHandler) {
+        this.usernameValidationHandler = usernameValidationHandler;
         return this;
     }
     
-    public UserLogInController setValidatePassword (ValidatePassword validatePassword) {
-        this.validatePassword = validatePassword;
+    public UserLogInController setValidatePassword (PasswordValidationHandler passwordValidationHandler) {
+        this.passwordValidationHandler = passwordValidationHandler;
         return this;
     }
     

@@ -1,6 +1,8 @@
-package server.model.login;
+package server.model.login.handlers;
 
-public class ValidatePassword implements ValidateUsers {
+import server.model.login.classes.ValidateUsers;
+
+public class PasswordValidationHandler implements ValidateUsers {
     
     @Override
     public boolean validate (String inputText) {
