@@ -34,14 +34,14 @@ public class RegisterNewUser extends HashPassword implements Serializable {
      */
     public boolean registerUser (String username, String password, String email, String location) {
         try{
-            String hashedPassword = hashPassword(password);
+            //String hashedPassword = hashPassword(password); // TODO: hashPassword
             
             PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(
                     "INSERT INTO users (username, password, email, location, roles, is_admin)" +
                             " VALUES (?, ?, ?, ?, ?, ?)");
             
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, hashedPassword);
+            preparedStatement.setString(2, password); // TODO: hashPassword
             preparedStatement.setString(3, email);
             preparedStatement.setString(4, location);
             preparedStatement.setString(5, "user"); // default role

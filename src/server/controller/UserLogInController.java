@@ -5,34 +5,36 @@ import server.model.login.handlers.UsernameValidation;
 import server.view.DatabaseConnection;
 import shared.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Controller for handling user login logic.
- * Validates username and password, then retrieves the user from the database.
+ Controller for handling user login logic.
+ Validates username and password, then retrieves the user from the database.
  */
-public class UserLogInController {
+public class UserLogInController extends DatabaseConnection {
     private UsernameValidation usernameCheck;
     private PasswordValidation passwordCheck;
     private DatabaseConnection databaseConnection;
     
     /**
-     * Constructs a new {@code UserLogInController}.
+     Constructs a new {@code UserLogInController}.
      */
     public UserLogInController ( ) {
     
     }
     
     /**
-     * Attempts to log in a user by validating credentials and querying the database.
-     *
-     * @param username the username to validate and authenticate
-     * @param password the password to validate and authenticate
-     * @return a {@link User} object if authentication is successful; {@code null} otherwise
-     * @throws SQLException if a database access error occurs
+     Attempts to log in a user by validating credentials and querying the database.
+     
+     @param username the username to validate and authenticate
+     @param password the password to validate and authenticate
+     
+     @return a {@link User} object if authentication is successful; {@code null} otherwise
+     
+     @throws SQLException if a database access error occurs
      */
-    // TODO no nested loops
     public User loginUser (String username, String password) throws SQLException {
         if (! usernameCheck.validate(username)) {
             System.out.println("failed username");
@@ -45,16 +47,53 @@ public class UserLogInController {
         }
         
         // If the username and password are valid, query the database for the user
-        ResultSet resultSet = databaseConnection.getUserForLogin(username, password);
+        ResultSet resultSet = getUserForLogin(username, password);
         return new User(resultSet);
     }
     
-    // --- Setters ----------------------------------------------------------------------------------------------------
     /**
-     * Sets the username validation handler.
-     *
-     * @param usernameCheck the {@link UsernameValidation} handler
-     * @return this controller instance
+     Retrieves a user from the database matching the provided username and password.
+     
+     @param username    the username to search for
+     @param rawPassword the password to match
+     
+     @return a {@link ResultSet} containing the user data if found, or {@code null} if not found or an error occurs
+     */
+    public ResultSet getUserForLogin (String username, String rawPassword) {
+        try {
+            //String hashedPassword = hashPassword(rawPassword); // TODO: fix hashing algorithm
+            
+            PreparedStatement statement = getConnection().prepareStatement(
+                    "SELECT * FROM users " +
+                            "WHERE username = ? " +
+                            "AND password = ?");
+            
+            statement.setString(1, username); // validated username
+            statement.setString(2, rawPassword); // validated password TODO: hashPassword
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                System.out.println("User found: " + resultSet.getString("username"));
+            }
+            else {
+                System.out.println("User not found");
+            }
+            return resultSet;
+        }
+        catch (SQLException e) {
+            return null;
+        }
+    }
+    
+    // --- Setters ----------------------------------------------------------------------------------------------------
+    
+    /**
+     Sets the username validation handler.
+     
+     @param usernameCheck the {@link UsernameValidation} handler
+     
+     @return this controller instance
      */
     public UserLogInController setValidateUsername (UsernameValidation usernameCheck) {
         this.usernameCheck = usernameCheck;
@@ -62,10 +101,11 @@ public class UserLogInController {
     }
     
     /**
-     * Sets the password validation handler.
-     *
-     * @param passwordCheck the {@link PasswordValidation} handler
-     * @return this controller instance
+     Sets the password validation handler.
+     
+     @param passwordCheck the {@link PasswordValidation} handler
+     
+     @return this controller instance
      */
     public UserLogInController setValidatePassword (PasswordValidation passwordCheck) {
         this.passwordCheck = passwordCheck;
@@ -73,10 +113,11 @@ public class UserLogInController {
     }
     
     /**
-     * Sets the database connection.
-     *
-     * @param databaseConnection the {@link DatabaseConnection} to use
-     * @return this controller instance
+     Sets the database connection.
+     
+     @param databaseConnection the {@link DatabaseConnection} to use
+     
+     @return this controller instance
      */
     public UserLogInController setDatabaseConnection (DatabaseConnection databaseConnection) {
         this.databaseConnection = databaseConnection;
