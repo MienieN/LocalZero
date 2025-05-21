@@ -3,6 +3,7 @@ package server.controller;
 import server.model.login.handlers.PasswordValidation;
 import server.model.login.handlers.UsernameValidation;
 import server.view.DatabaseConnection;
+import shared.Login;
 import shared.User;
 
 import java.sql.PreparedStatement;
@@ -28,14 +29,16 @@ public class UserLogInController extends DatabaseConnection {
     /**
      Attempts to log in a user by validating credentials and querying the database.
      
-     @param username the username to validate and authenticate
-     @param password the password to validate and authenticate
+     @param login a serializable object sent from the client containing username and password
      
      @return a {@link User} object if authentication is successful; {@code null} otherwise
      
      @throws SQLException if a database access error occurs
      */
-    public User loginUser (String username, String password) throws SQLException {
+    public User loginUser (Login login){
+        String username = login.getUsername();
+        String password = login.getPassword();
+
         if (! usernameCheck.validate(username)) {
             System.out.println("failed username");
             return null;
@@ -48,7 +51,11 @@ public class UserLogInController extends DatabaseConnection {
         
         // If the username and password are valid, query the database for the user
         ResultSet resultSet = getUserForLogin(username, password);
-        return new User(resultSet);
+        try {
+            return new User(resultSet);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     
     /**
