@@ -2,6 +2,7 @@ package server.model;
 
 import server.controller.ConnectionControllerServer;
 import server.controller.UserLogInController;
+import shared.Action;
 import shared.Login;
 
 import java.io.IOException;
@@ -54,9 +55,8 @@ public class ConnectionHandler extends Thread {
         if (object instanceof Login) {
             userLogInController.loginUser((Login) object);
             connectionControllerServer.addHandler(this);
-//        } else if (object instanceof Message) {
-//            messageControllerServer.sendMessage((Message) object);
-//        }
+        } else if (object instanceof Action) {
+            connectionControllerServer.doAction((Action) object);
         }
     }
 }

@@ -9,8 +9,14 @@ public class MainClient {
     public static void main(String[] args) {
         Terminal terminal = new Terminal();
         ServerConnection serverConnection = new ServerConnection("127.0.01", 741);
-        ConnectionControllerClient connectionControllerClient = new ConnectionControllerClient(serverConnection);
+        ConnectionControllerClient connectionControllerClient = new ConnectionControllerClient();
+        Controller controller = new Controller();
+        connectionControllerClient.setServerConnection(serverConnection);
         serverConnection.setConnectionControllerClient(connectionControllerClient);
-        Controller controller = new Controller(terminal, connectionControllerClient);
+        controller.setTerminal(terminal);
+        controller.setConnectionController(connectionControllerClient);
+
+        //for testing while coding, replace with login.
+        controller.makeChoice();
     }
 }

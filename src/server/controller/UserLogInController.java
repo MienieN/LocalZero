@@ -66,6 +66,7 @@ public class UserLogInController extends DatabaseConnection {
      
      @return a {@link ResultSet} containing the user data if found, or {@code null} if not found or an error occurs
      */
+   //this should porbably be moved into databaseconnection
     public ResultSet getUserForLogin (String username, String rawPassword) {
         try {
             //String hashedPassword = hashPassword(rawPassword); // TODO: fix hashing algorithm
@@ -77,7 +78,7 @@ public class UserLogInController extends DatabaseConnection {
             
             statement.setString(1, username); // validated username
             statement.setString(2, rawPassword); // validated password TODO: hashPassword
-            
+            //this should porbably be moved into databaseconnection (sendQuery method) due to this not being a view class
             ResultSet resultSet = statement.executeQuery();
             
             if (resultSet.next()) {

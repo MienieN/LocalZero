@@ -45,6 +45,17 @@ public class DatabaseConnection extends HashPassword {
             throw new RuntimeException(e);
         }
     }
+
+    public ResultSet sendQuery(PreparedStatement query){
+        try {
+            ResultSet resultSet = query.executeQuery();
+            return resultSet;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //TODO add method sendUpdate that does not return anything for querys like update
     
     
     public String getDatabasePassword ( ) {

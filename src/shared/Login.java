@@ -2,6 +2,10 @@ package shared;
 
 import java.io.Serializable;
 
+/**
+ * User login info stored in a serializable object for sending to the server
+ */
+
 public class Login implements Serializable {
     private String username;
     private String password;

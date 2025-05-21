@@ -1,13 +1,16 @@
 package server.controller;
 
 import server.model.ConnectionHandler;
+import shared.Action;
 
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ConnectionControllerServer {
     private ArrayList<ConnectionHandler> connectedUsers = new ArrayList<>();
     private UserLogInController userLoginController;
+    private ActionController actionController;
     public void createHandler(Socket socket) {
         new ConnectionHandler(socket, this, userLoginController);
     }
@@ -22,5 +25,19 @@ public class ConnectionControllerServer {
 
     public void setUserLoginController(UserLogInController userLoginController) {
         this.userLoginController = userLoginController;
+    }
+
+    public void setActionController(ActionController actionController) {
+        this.actionController = actionController;
+    }
+
+    //TODO rename this
+    public void doAction(Action object) {
+        try {
+            actionController.doAction(object);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
