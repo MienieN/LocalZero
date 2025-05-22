@@ -4,7 +4,7 @@ import server.controller.ConnectionControllerServer;
 import server.controller.UserInformationController;
 import shared.Action;
 import shared.Login;
-import shared.IMessage;
+import shared.IServerMessage;
 import shared.Registration;
 
 import java.io.IOException;
@@ -66,7 +66,7 @@ public class ConnectionHandler extends Thread {
         }
         
         else if(object instanceof Registration) {
-            IMessage message = userInformationController.registerUser(((Registration) object).getUsername(),
+            IServerMessage message = userInformationController.registerUser(((Registration) object).getUsername(),
                     ((Registration) object).getPassword(), ((Registration) object).getEmail(),
                     ((Registration) object).getLocation(), ((Registration) object).getRole(),
                     ((Registration) object).isAdmin());

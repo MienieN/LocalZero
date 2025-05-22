@@ -1,22 +1,22 @@
 package client.controller;
 
 import client.view.ServerConnection;
-import shared.Message;
-import shared.MessageType;
+import shared.ServerMessage;
+import shared.ServerMessageType;
 
 public class ConnectionControllerClient {
     private ServerConnection serverConnection;
     private Controller controller;
     
     public void inputReceived(Object object) {
-        if (object instanceof Message) {
-            if(((Message) object).getType()== MessageType.ERROR_MESSAGE){
-                ((Message) object).displayMessage();
+        if (object instanceof ServerMessage) {
+            if(((ServerMessage) object).getType()== ServerMessageType.ERROR_MESSAGE){
+                ((ServerMessage) object).displayMessage();
                 controller.checkLoginScreenChoice();
             }
             
-            else if (((Message) object).getType() == MessageType.SUCCESS_MESSAGE) {
-                ((Message) object).displayMessage();
+            else if (((ServerMessage) object).getType() == ServerMessageType.SUCCESS_MESSAGE) {
+                ((ServerMessage) object).displayMessage();
             }
         }
     }

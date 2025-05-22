@@ -1,8 +1,8 @@
 package shared;
 
-public class Message implements IMessage {
+public class ServerMessage implements IServerMessage {
     private String message;
-    private MessageType type;
+    private ServerMessageType type;
     
     @Override
     public void displayMessage () {
@@ -15,11 +15,11 @@ public class Message implements IMessage {
     }
     
     @Override
-    public void setType (MessageType type) {
+    public void setType (ServerMessageType type) {
         this.type = type;
     }
     
-    public MessageType getType ( ) {
+    public ServerMessageType getType ( ) {
         return type;
     }
 }

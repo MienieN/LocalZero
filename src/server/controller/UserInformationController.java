@@ -75,8 +75,8 @@ public class UserInformationController {
         }
     }
     
-    public IMessage registerUser (String username, String password, String email, String location, String role, boolean isAdmin) {
-        IMessage message = new Message();
+    public IServerMessage registerUser (String username, String password, String email, String location, String role, boolean isAdmin) {
+        IServerMessage message = new ServerMessage();
         
         try {
             PreparedStatement statement = databaseConnection.getConnection().prepareStatement(
@@ -93,13 +93,13 @@ public class UserInformationController {
             databaseConnection.sendUpdate(statement);
             
             message.setMessage("Registration Successful");
-            message.setType(MessageType.SUCCESS_MESSAGE);
+            message.setType(ServerMessageType.SUCCESS_MESSAGE);
         }
         
         catch (SQLException e) {
             System.out.println("Username already exists"); // server side
             message.setMessage("Username already exists"); // client side
-            message.setType(MessageType.ERROR_MESSAGE);
+            message.setType(ServerMessageType.ERROR_MESSAGE);
         }
         
         return message;
