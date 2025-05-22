@@ -1,6 +1,6 @@
 package client.model;
 
-public class EmailValidation implements ValidateUsers{
+public class EmailValidation implements UsersValidation {
     @Override
     public boolean validate (String inputText) {
         if (inputText == null) {

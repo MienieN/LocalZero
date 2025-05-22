@@ -7,7 +7,7 @@ package client.model;
  such as usernames or passwords.
  </p>
  */
-public interface ValidateUsers {
+public interface UsersValidation {
     /**
      Validates the given input text.
      

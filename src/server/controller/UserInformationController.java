@@ -118,4 +118,25 @@ public class UserInformationController {
         return this;
     }
     
+    public void alterAdminStatus (IsAdminStatus object) {
+        boolean isAdmin = object.isAdmin();
+        String username = object.getUsername();
+        
+        try{
+            PreparedStatement statement = databaseConnection.getConnection().prepareStatement(
+                    "UPDATE users SET is_admin = ?" +
+                            "WHERE username = ?"
+            );
+            
+            statement.setBoolean(1, isAdmin);
+            statement.setString(2, username);
+            
+            databaseConnection.sendUpdate(statement);
+        }
+        catch (SQLException e) {
+            System.out.println("Could not update admin status");
+            throw new RuntimeException(e);
+        }
+        
+    }
 }

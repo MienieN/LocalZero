@@ -27,8 +27,8 @@ public class Controller {
     }
     
     public void login (Login login) {
-        ValidateUsers validateUserName = new UsernameValidation();
-        ValidateUsers validateUserPassword = new PasswordValidation();
+        UsersValidation validateUserName = new UsernameValidation();
+        UsersValidation validateUserPassword = new PasswordValidation();
         
         while (! (validateUserName.validate(login.getUsername()) && validateUserPassword.validate(login.getPassword()))) {
             System.out.println("Login failed");
@@ -42,10 +42,10 @@ public class Controller {
     }
     
     public void register (Registration registration) {
-        ValidateUsers validateUserName = new UsernameValidation();
-        ValidateUsers validateUserPassword = new PasswordValidation();
-        ValidateUsers validateUserEmail = new EmailValidation();
-        ValidateUsers validateUserLocation = new LocationValidation();
+        UsersValidation validateUserName = new UsernameValidation();
+        UsersValidation validateUserPassword = new PasswordValidation();
+        UsersValidation validateUserEmail = new EmailValidation();
+        UsersValidation validateUserLocation = new LocationValidation();
         
         while (! (validateUserName.validate(registration.getUsername()) &&
                 validateUserPassword.validate(registration.getPassword()) &&
@@ -78,4 +78,21 @@ public class Controller {
         }
     }
     
+    public void goneBiking (int kilometers){
+        Action biking = new Biking(kilometers, user);
+        connectionControllerClient.sendObject(biking);
+    }
+    
+    public void setLoggedInUser (User user ) {
+        this.user = user;
+        terminal.showMenu();
+    }
+    
+    public User getUser ( ) {
+        return user;
+    }
+    
+    public void alterAdminStatus (IsAdminStatus admin) {
+        connectionControllerClient.sendObject(admin);
+    }
 }

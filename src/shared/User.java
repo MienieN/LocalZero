@@ -107,7 +107,7 @@ public class User implements Serializable {
     /**
      @return {@code true} if the user is an admin, {@code false} otherwise
      */
-    public boolean isAdmin ( ) {
+    public boolean getIsAdmin ( ) {
         return isAdmin;
     }
     
