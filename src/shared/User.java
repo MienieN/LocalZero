@@ -1,5 +1,6 @@
 package shared;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  Stores username, password, email, location, roles, and admin status.
  </p>
  */
-public class User {
+public class User implements Serializable {
     private final String username; // The user's unique username.
     private final String password;  // The user's hashed password. TODO: fix hashing algorithm
     private final String email; // The user's email address.
