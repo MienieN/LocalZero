@@ -15,9 +15,12 @@ public class MainServer {
         UserLogInController userLogInController = new UserLogInController();
         ActionController actionController = new ActionController();
         DatabaseConnection databaseConnection = new DatabaseConnection();
+        
+        
         actionController.setDatabaseConnection(databaseConnection);
         connectionControllerServer.setActionController(actionController);
         connectionControllerServer.setUserLoginController(userLogInController);
+        
         try {
             new ClientConnection(connectionControllerServer);
         } catch (IOException e) {

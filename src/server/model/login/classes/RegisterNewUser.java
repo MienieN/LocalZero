@@ -1,6 +1,5 @@
-package server.model.login.handlers;
+package server.model.login.classes;
 
-import server.model.login.classes.HashPassword;
 import server.view.DatabaseConnection;
 
 import java.io.Serializable;
@@ -55,5 +54,4 @@ public class RegisterNewUser extends HashPassword implements Serializable {
         }
         
     }
-    
 }
