@@ -13,6 +13,7 @@ public class ServerConnection extends Thread{
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private ConnectionControllerClient connectionControllerClient;
+    
     public ServerConnection(String ipAddress, int port) {
         try {
             socket = new Socket(ipAddress, port);

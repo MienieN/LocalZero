@@ -1,4 +1,4 @@
-package server.model.login.classes;
+package client.model;
 
 /**
  Interface for user input validation.

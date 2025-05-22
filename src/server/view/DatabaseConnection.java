@@ -1,62 +1,67 @@
 package server.view;
 
-import server.model.login.classes.HashPassword;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
+// TODO: when creating a new user, should validate that the username is not already in use
+
 /**
- * Handles the connection to the PostgreSQL database and user authentication queries.
+ Handles the connection to the PostgreSQL database and user authentication queries.
  */
-public class DatabaseConnection extends HashPassword {
+public class DatabaseConnection {
     private final String databasePassword; // The password used for the database connection, read from a file.
     private Connection connection; // The active database connection.
     
     /**
-     * Constructs a new {@code DatabaseConnection} and establishes a connection
-     * using credentials from the {@code passwords.env} file.
-     *
-     * @throws RuntimeException if the password file is not found or cannot be read
+     Constructs a new {@code DatabaseConnection} and establishes a connection
+     using credentials from the {@code passwords.env} file.
+     
+     @throws RuntimeException if the password file is not found or cannot be read
      */
-    public DatabaseConnection() {
+    public DatabaseConnection ( ) {
         try {
             databasePassword = new BufferedReader(new FileReader("passwords.env")).readLine().split("=")[1];
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
         connect();
     }
     
     /**
-     * Establishes a connection to the PostgreSQL database.
-     *
-     * @throws RuntimeException if a database access error occurs
+     Establishes a connection to the PostgreSQL database.
+     
+     @throws RuntimeException if a database access error occurs
      */
-    public void connect() {
+    public void connect ( ) {
         try {
             connection = DriverManager
                     .getConnection("jdbc:postgresql://pgserver.mau.se:5432/localzero", "ao7503", databasePassword);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-    public ResultSet sendQuery(PreparedStatement query){
+    
+    public ResultSet sendQuery (PreparedStatement query) {
         try {
             ResultSet resultSet = query.executeQuery();
             return resultSet;
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-
-    //TODO add method sendUpdate that does not return anything for querys like update
     
+    public void sendUpdate (PreparedStatement query) throws SQLException {
+        query.execute();
+    }
     
     public String getDatabasePassword ( ) {
         return databasePassword;

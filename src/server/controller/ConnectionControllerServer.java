@@ -9,8 +9,9 @@ import java.util.ArrayList;
 
 public class ConnectionControllerServer {
     private ArrayList<ConnectionHandler> connectedUsers = new ArrayList<>();
-    private UserLogInController userLoginController;
+    private UserInformationController userLoginController;
     private ActionController actionController;
+    
     public void createHandler(Socket socket) {
         new ConnectionHandler(socket, this, userLoginController);
     }
@@ -23,7 +24,7 @@ public class ConnectionControllerServer {
         connectedUsers.add(connectionHandler);
     }
 
-    public void setUserLoginController(UserLogInController userLoginController) {
+    public void setUserLoginController(UserInformationController userLoginController) {
         this.userLoginController = userLoginController;
     }
 

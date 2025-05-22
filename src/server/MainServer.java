@@ -1,9 +1,8 @@
 package server;
 
-import client.controller.ConnectionControllerClient;
 import server.controller.ActionController;
 import server.controller.ConnectionControllerServer;
-import server.controller.UserLogInController;
+import server.controller.UserInformationController;
 import server.view.ClientConnection;
 import server.view.DatabaseConnection;
 
@@ -12,20 +11,22 @@ import java.io.IOException;
 public class MainServer {
     public static void main(String[] args){
         ConnectionControllerServer connectionControllerServer = new ConnectionControllerServer();
-        UserLogInController userLogInController = new UserLogInController();
+        UserInformationController userInformationController = new UserInformationController();
         ActionController actionController = new ActionController();
-        DatabaseConnection databaseConnection = new DatabaseConnection();
         
+        DatabaseConnection databaseConnection = new DatabaseConnection();
+        userInformationController.setDatabaseConnection(databaseConnection);
         
         actionController.setDatabaseConnection(databaseConnection);
         connectionControllerServer.setActionController(actionController);
-        connectionControllerServer.setUserLoginController(userLogInController);
+        connectionControllerServer.setUserLoginController(userInformationController);
         
         try {
             new ClientConnection(connectionControllerServer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        
         System.out.println("Server is running");
     }
 }
