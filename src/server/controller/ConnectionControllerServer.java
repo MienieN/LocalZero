@@ -2,6 +2,7 @@ package server.controller;
 
 import server.model.ConnectionHandler;
 import shared.Action;
+import shared.IsAdminStatus;
 
 import java.net.Socket;
 import java.sql.SQLException;
@@ -41,4 +42,5 @@ public class ConnectionControllerServer {
         }
 
     }
+    
 }

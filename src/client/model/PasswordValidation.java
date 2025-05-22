@@ -1,6 +1,6 @@
 package client.model;
 
-public class PasswordValidation implements ValidateUsers {
+public class PasswordValidation implements UsersValidation {
     
     @Override
     public boolean validate (String inputText) {

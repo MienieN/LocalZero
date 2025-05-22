@@ -1,10 +1,8 @@
 package shared;
 
 public class Biking implements Action{
-
     private int savedCo2;
     private User user;
-
     private int kilometers;
 
     public Biking(int kilometers, User user){

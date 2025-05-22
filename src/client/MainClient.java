@@ -21,6 +21,10 @@ public class MainClient {
         controller.setTerminal(terminal);
         controller.setConnectionController(connectionControllerClient);
         
+        terminal.setController(controller);
+        
+        
         controller.checkLoginScreenChoice();
+        
     }
 }

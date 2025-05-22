@@ -1,6 +1,6 @@
 package client.model;
 
-public class LocationValidation implements ValidateUsers {
+public class LocationValidation implements UsersValidation {
     
     @Override
     public boolean validate (String inputText) {

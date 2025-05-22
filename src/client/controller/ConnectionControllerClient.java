@@ -3,6 +3,7 @@ package client.controller;
 import client.view.ServerConnection;
 import shared.Message;
 import shared.MessageType;
+import shared.User;
 
 public class ConnectionControllerClient {
     private ServerConnection serverConnection;
@@ -18,6 +19,10 @@ public class ConnectionControllerClient {
             else if (((Message) object).getType() == MessageType.SUCCESS_MESSAGE) {
                 ((Message) object).displayMessage();
             }
+        }
+        
+        else if (object instanceof User){
+            controller.setLoggedInUser((User) object);
         }
     }
 

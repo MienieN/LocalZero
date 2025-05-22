@@ -2,10 +2,7 @@ package server.model;
 
 import server.controller.ConnectionControllerServer;
 import server.controller.UserInformationController;
-import shared.Action;
-import shared.Login;
-import shared.IMessage;
-import shared.Registration;
+import shared.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -57,28 +54,57 @@ public class ConnectionHandler extends Thread {
         System.out.println(object.getClass());
         
         if (object instanceof Login) {
-            // TODO: proper error handling if the username does not exist
-            //  (need a message on the client side for "user not found")
-            //  need to return to login screen if failure occurs
-            userInformationController.loginUser((Login) object);
-            connectionControllerServer.addHandler(this);
-            
+            serverReceivesLogin((Login) object);
         }
         
         else if(object instanceof Registration) {
-            IMessage message = userInformationController.registerUser(((Registration) object).getUsername(),
-                    ((Registration) object).getPassword(), ((Registration) object).getEmail(),
-                    ((Registration) object).getLocation(), ((Registration) object).getRole(),
-                    ((Registration) object).isAdmin());
-            
-            //TODO: if registration is successful, we send client back to login in order to login (or auto login)
-            connectionControllerServer.addHandler(this);
-            serverSendsObject(message);
+            serverReceivesRegistration((Registration) object);
         }
         
+        // TODO: create a serverReceivesAction ... for future development
         else if (object instanceof Action) {
             connectionControllerServer.doAction((Action) object);
         }
+        
+        else if (object instanceof IsAdminStatus){
+            userInformationController.alterAdminStatus((IsAdminStatus) object);
+        }
+    }
+    
+    private void serverReceivesLogin(Login login) throws IOException {
+        if (userInformationController.loginUser(login) != null){
+            
+            User user = userInformationController.loginUser(login);
+            connectionControllerServer.addHandler(this);
+            serverSendsObject(user);
+        }
+        
+        else{
+            IMessage message = new Message();
+            message.setMessage("User does not exist");
+            message.setType(MessageType.ERROR_MESSAGE);
+            
+            serverSendsObject(message);
+        }
+    }
+    
+    private void serverReceivesRegistration(Registration registration) throws IOException {
+        IMessage message = userInformationController.registerUser(registration.getUsername(),
+                registration.getPassword(), registration.getEmail(),
+                registration.getLocation(), registration.getRole(),
+                registration.isAdmin());
+        
+        connectionControllerServer.addHandler(this);
+        if (message.getType() == MessageType.SUCCESS_MESSAGE){
+            serverSendsObject(message);
+            Login login = new Login(registration.getUsername(), registration.getPassword());
+            serverSendsObject(userInformationController.loginUser(login));
+        }
+        
+        else if (message.getType() == MessageType.ERROR_MESSAGE){
+            serverSendsObject(message);
+        }
+        
     }
     
     private void serverSendsObject(Object object) throws IOException {
