@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class User implements Serializable {
     private final String username; // The user's unique username.
-    private final String password;  // The user's hashed password. TODO: fix hashing algorithm
+    private final String password;  // The user's password.
     private final String email; // The user's email address.
     private final String location; // The user's location.
     private final ArrayList <String> roles; // The list of roles assigned to the user.
