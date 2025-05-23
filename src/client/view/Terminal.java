@@ -9,9 +9,13 @@ public class Terminal {
     Scanner scanner = new Scanner(System.in);
     
     private Controller controller;
-    
-    public Terminal ( ) {
-    
+    private static Terminal instance;
+
+    public static Terminal getInstance() {
+        if (instance == null) {
+            instance = new Terminal();
+        }
+        return instance;
     }
     
     public UserInformation startupMenu ( ) {

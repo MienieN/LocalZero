@@ -13,6 +13,14 @@ public class ServerConnection extends Thread{
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     private ConnectionControllerClient connectionControllerClient;
+    private static ServerConnection instance;
+
+    public static ServerConnection getInstance(String ipAddress, int port){
+        if(instance == null){
+            instance = new ServerConnection(ipAddress, port);
+        }
+        return instance;
+    }
     
     public ServerConnection(String ipAddress, int port) {
         try {
