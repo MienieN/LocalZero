@@ -4,7 +4,7 @@ import java.util.List;
 
 public class DirectMessage extends CommunityMessage {
     private boolean read;
-    public DirectMessage(String text, MessageType type, User sender, List<User> recipients) {
+    public DirectMessage(String text, MessageType type, String sender, List<String> recipients) {
         super(text, type, sender, recipients);
     }
 

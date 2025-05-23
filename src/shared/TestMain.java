@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class TestMain {
 
     public static void main(String[] args) {
-        ArrayList<String> roles = new ArrayList<>();
+        /*ArrayList<String> roles = new ArrayList<>();
         roles.add("community president");
         roles.add("awesome person");
 
@@ -37,6 +37,6 @@ public class TestMain {
         singleRecepient.add(user2);
         Notification commentNotif = new Notification("Det här var så bra!!!", MessageType.COMMENT, user3, singleRecepient, "Clean the beach");
         commentNotif.displayMessage();
-        System.out.println("Skickat från " + commentNotif.getSender() + " till " + commentNotif.getRecipients() + "\n\n");
+        System.out.println("Skickat från " + commentNotif.getSender() + " till " + commentNotif.getRecipients() + "\n\n");*/
     }
 }

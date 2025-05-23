@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Notification extends CommunityMessage {
     private String originalPostTitle;
-    public Notification(String text, MessageType type, User sender, List<User> recipients, String originalPostTitle) {
+    public Notification(String text, MessageType type, String sender, List<String> recipients, String originalPostTitle) {
         super(text, type, sender, recipients);
         this.originalPostTitle = originalPostTitle;
     }
