@@ -30,4 +30,8 @@ public class PlantTrees extends ActionAbstract{
     public int getTreesPlanted() {
         return treesPlanted;
     }
+
+    public String toString() {
+        return user.getUsername() + " planted " + treesPlanted + " trees, saving " + savedCo2 + "kg CO2!";
+    }
 }

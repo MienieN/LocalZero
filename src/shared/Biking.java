@@ -30,4 +30,8 @@ public class Biking extends ActionAbstract {
     public int getKilometers(){
         return kilometers;
     }
+
+    public String toString(){
+        return user.getUsername() + " biked " + kilometers + " km, saving " + savedCo2 + "kg CO2!";
+    }
 }

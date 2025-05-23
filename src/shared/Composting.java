@@ -30,4 +30,8 @@ public class Composting extends ActionAbstract {
     public int getKg() {
         return kg;
     }
+
+    public String toString() {
+        return user.getUsername() + " composted " + kg + " kg, saving " + savedCo2 + "kg CO2!";
+    }
 }

@@ -114,7 +114,7 @@ public class Terminal {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Log Sustainability action");
         System.out.println("2. Create initiative");
-        System.out.println("3. View forum");
+        System.out.println("3. View feed");
         System.out.println("4. Check neighbourhood CO2 saved");
 
 

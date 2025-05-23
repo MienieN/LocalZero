@@ -30,4 +30,9 @@ public class PublicTransport extends ActionAbstract {
     public int getKilometers() {
         return kilometers;
     }
+
+    public String toString() {
+        return user.getUsername() + " travelled " + kilometers + "km by public transport, saving "
+                + savedCo2 + "kg CO2!";
+    }
 }
