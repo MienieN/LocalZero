@@ -17,11 +17,15 @@ public class PublicTransport implements Action{
 
     @Override
     public int getSavedCo2() {
-        return 0;
+        return savedCo2;
     }
 
     @Override
     public User getUser() {
-        return null;
+        return user;
+    }
+
+    public int getKilometers() {
+        return kilometers;
     }
 }
