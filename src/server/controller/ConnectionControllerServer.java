@@ -40,4 +40,8 @@ public class ConnectionControllerServer {
             throw new RuntimeException(e);
         }
     }
+
+    public ArrayList<ConnectionHandler> getConnectedUsers() {
+        return connectedUsers;
+    }
 }
