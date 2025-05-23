@@ -1,7 +1,11 @@
 package client.controller;
 
 import shared.ActionInitiativeStorage;
+import shared.IInitiative;
+import shared.Initiative;
+
 import java.util.List;
+import java.util.random.RandomGenerator;
 
 public class FeedController {
     private ActionInitiativeStorage storage;
@@ -24,5 +28,26 @@ public class FeedController {
         for (int i = 0; i < initiatives.size(); i++) {
             System.out.println((i + 1) + ". " + initiatives.get(i).toString());
         }
+    }
+
+    public void joinInitiative(String username) {
+        List initiatives = storage.getLatestInitiatives(10);
+        int randomNumber = RandomGenerator.getDefault().nextInt(initiatives.size());
+
+        storage.joinInitiative(randomNumber, username);
+    }
+
+    public void likeAction() {
+        List actions = storage.getLatestActions(10);
+        int randomNumber = RandomGenerator.getDefault().nextInt(actions.size());
+
+        storage.likeAction(randomNumber);
+    }
+
+    public void viewInitiativeDetails() {
+        List actions = storage.getLatestActions(10);
+        int randomNumber = RandomGenerator.getDefault().nextInt(actions.size());
+
+        storage.viewInitiativeDetails(randomNumber);
     }
 }

@@ -12,6 +12,7 @@ public abstract class ActionAbstract implements Serializable {
     public abstract void calculateSavedCo2();
     public abstract int getSavedCo2();
     public abstract String getUsername();
-
     public abstract String getLocation();
+    public abstract void likeAction();
+    public abstract int getLikes();
 }

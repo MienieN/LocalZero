@@ -41,4 +41,29 @@ public class ActionInitiativeStorage {
         int startIndex = Math.max(0, list.size() - maxCount);
         return new ArrayList<>(list.subList(startIndex, list.size()));
     }
+
+    public void joinInitiative(int index, String name) {
+        initiatives.get(index).addParticipant(name);
+    }
+
+    public void likeAction(int randomNumber) {
+        actions.get(randomNumber).likeAction();
+    }
+
+    public void viewInitiativeDetails(int randomNumber) {
+        IInitiative initiative = initiatives.get(randomNumber);
+        System.out.println("Creator: " + initiative.getUsername());
+        System.out.println("Title: " + initiative.getTitle());
+        System.out.println("Description: " + initiative.getDescription());
+        System.out.println("Location: " + initiative.getLocation());
+        System.out.println("Duration: " + initiative.getDuration());
+        System.out.println("Category: " + initiative.getCategory());
+        System.out.println("Visibility: " + initiative.getIsPublic());
+        System.out.println("Participants: ");
+
+        ArrayList<String> participants = initiative.getParticipants();
+        for (String participant : participants) {
+            System.out.println(participant);
+        }
+    }
 }

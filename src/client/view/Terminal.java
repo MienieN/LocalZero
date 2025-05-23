@@ -9,6 +9,7 @@ public class Terminal {
     Scanner scanner = new Scanner(System.in);
     
     private Controller controller;
+    private ActionInitiativeTerminal actionInitiativeTerminal;
     private static Terminal instance;
 
     public static Terminal getInstance() {
@@ -61,54 +62,6 @@ public class Terminal {
         return null;
     }
 
-    public void showSustainabilityMenu ( ) {
-        System.out.println("-----------------------------------------------");
-        System.out.println("1. Biking");
-        System.out.println("2. Composting");
-        System.out.println("3. Public Transport");
-        System.out.println("4. Planting Trees");
-        System.out.println("0. Back");
-        System.out.println("Please select an option: ");
-        System.out.println("-----------------------------------------------");
-        
-        int choice = scanner.nextInt();
-        //scanner.nextInt(); //newline char bullshit
-        
-        switch (choice) {
-            case 1:
-                System.out.println("How far did you bike? (km)");
-                int kilometers = scanner.nextInt();
-                scanner.nextLine();
-                controller.goneBiking(kilometers);
-                System.out.println("Thanks for biking!");
-                break;
-            case 2:
-                System.out.println("How much food waste did you compost? (kg)");
-                int foodwaste = scanner.nextInt();
-                scanner.nextLine();
-                controller.composting(foodwaste);
-                System.out.println("Thanks for composting!");
-                break;
-            case 3:
-                System.out.println("How far did you go? (km)");
-                int km = scanner.nextInt();
-                scanner.nextLine();
-                controller.usedPublicTransport(km);
-                System.out.println("Thanks for choosing public transport!");
-                break;
-            case 4:
-                System.out.println("How many trees did you plant?");
-                int treesPlanted = scanner.nextInt();
-                scanner.nextLine();
-                controller.plantedTrees(treesPlanted);
-                System.out.println("Thanks for planting trees!");
-                break;
-            case 0:
-                showMenu();
-                break;
-        }
-        showMenu();
-    }
 
     public void showMenu ( ) {
         System.out.println("-----------------------------------------------");
@@ -132,13 +85,13 @@ public class Terminal {
 
         switch (choice) {
             case 1:
-                showSustainabilityMenu();
+                actionInitiativeTerminal.showSustainabilityMenu();
                 break;
             case 2:
-                createInitiative();
+                actionInitiativeTerminal.createInitiative();
                 break;
             case 3:
-                showFeedMenu();
+                actionInitiativeTerminal.showFeedMenu();
                 break;
             case 4:
                 getNeighbourhoodCO2Stats();
@@ -168,87 +121,9 @@ public class Terminal {
         }
     }
 
-    private void showFeedMenu() {
-        System.out.println("-----------------------------------------------");
-        System.out.println("1. View latest actions");
-        System.out.println("2. View latest initiatives");
-        System.out.println("0. Back");
-        System.out.println("Please select an option: ");
-        System.out.println("-----------------------------------------------");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        switch (choice) {
-            case 1:
-                controller.viewFeed("actions");
-                showFeedMenu();
-                break;
-            case 2:
-                controller.viewFeed("initiatives");
-                showFeedMenu();
-                break;
-            default:
-                showMenu();
-        }
-    }
-
     private void getNeighbourhoodCO2Stats () {
         CO2Status co2Status = new CO2Status();
         controller.viewCO2StatusForLocation(co2Status);
-    }
-    
-    private void createInitiative ( ) {
-        System.out.println("Creating a new Initiative. Information required.");
-        System.out.println("Title: ");
-        String title = scanner.nextLine();
-        scanner.nextLine();
-
-        System.out.println("Description: ");
-        String description = scanner.nextLine();
-        scanner.nextLine();
-
-        System.out.println("Location: ");
-        String location = scanner.nextLine();
-        scanner.nextLine();
-
-        System.out.println("Duration: ");
-        String duration = scanner.nextLine();
-        scanner.nextLine();
-
-        controller.createInitiative(title, description, location, duration, showInitiativeCategoryMenu(), showVisibilityMenu());
-    }
-
-    private InitiativeCategory showInitiativeCategoryMenu ( ) {
-        InitiativeCategory.printNumberedOptions();
-        int choice = scanner.nextInt();
-        scanner.nextLine();
-
-        return switch (choice) {
-            case 1 -> InitiativeCategory.SOCIAL_GATHERING;
-            case 2 -> InitiativeCategory.FITNESS;
-            case 3 -> InitiativeCategory.SELLING;
-            case 4 -> InitiativeCategory.SHARING;
-            case 5 -> InitiativeCategory.VOLUNTEERING;
-            default -> InitiativeCategory.OTHER;
-        };
-    }
-
-    private boolean showVisibilityMenu() {
-        System.out.println("Visibility:");
-        System.out.println("-----------------------------------------------");
-        System.out.println("1. Public");
-        System.out.println("2. Neighbourhood");
-        System.out.println("Please select an option: ");
-        System.out.println("-----------------------------------------------");
-        int visibilityChoice = scanner.nextInt();
-        scanner.nextLine();
-
-        return switch (visibilityChoice) {
-            case 1 -> true;
-            case 2 -> false;
-            default -> false;
-        };
     }
     
     private void alterAdminStatus ( ) {
@@ -295,5 +170,6 @@ public class Terminal {
 
     public void setController (Controller controller) {
         this.controller = controller;
+        this.actionInitiativeTerminal = new ActionInitiativeTerminal(controller, this);
     }
 }
