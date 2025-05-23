@@ -1,10 +1,7 @@
 package client.view;
 
 import client.controller.Controller;
-import shared.IsAdminStatus;
-import shared.Login;
-import shared.Registration;
-import shared.UserInformation;
+import shared.*;
 
 import java.util.Scanner;
 
@@ -60,11 +57,9 @@ public class Terminal {
                 System.exit(0);
                 return null;
         }
-        
         return null;
     }
-    
-    
+
     public void showSustainabilityMenu ( ) {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Biking");
@@ -106,40 +101,46 @@ public class Terminal {
         }
         showMenu();
     }
-    
+
     public void showMenu ( ) {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Log Sustainability action");
-        System.out.println("2. View forum");
-        System.out.println("3. Check neighbourhood achievements");
-        
-        if (controller.getUser().getIsAdmin()){
-            System.out.println("4. Set user roles");
-            System.out.println("5. Set user admin status");
+        System.out.println("2. Create initiative");
+        System.out.println("3. View forum");
+        System.out.println("4. Check neighbourhood CO2 saved");
+
+        if (controller.getUser().getIsAdmin()) {
+            System.out.println("5. Set user roles");
+            System.out.println("6. Set user admin status");
         }
-        
+
         System.out.println("0. Logout");
         System.out.println("Please select an option: ");
         System.out.println("-----------------------------------------------");
-        
+
         int choice = scanner.nextInt();
         scanner.nextLine(); //scanner newline char bullshit
-        
-        switch (choice){
+
+        switch (choice) {
             case 1:
                 showSustainabilityMenu();
                 break;
             case 2:
+                createInitiative();
                 break;
             case 3:
+
                 break;
             case 4:
-                if (controller.getUser().getIsAdmin()){
-                
-                }
+
                 break;
             case 5:
-                if (controller.getUser().getIsAdmin()){
+                if (controller.getUser().getIsAdmin()) {
+
+                }
+                break;
+            case 6:
+                if (controller.getUser().getIsAdmin()) {
                     alterAdminStatus();
                 }
                 break;
@@ -147,6 +148,63 @@ public class Terminal {
                 System.exit(0);
                 break;
         }
+    }
+
+    private void createInitiative ( ) {
+        System.out.println("Creating a new Initiative. Information required.");
+        System.out.println("Title: ");
+        String title = scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Description: ");
+        String description = scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Location: ");
+        String location = scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Duration: ");
+        String duration = scanner.nextLine();
+        scanner.nextLine();
+
+        InitiativeCategory category = showInitiativeCategoryMenu();
+
+        boolean isPublic = showVisibilityMenu();
+
+        controller.createInitiative(title, description, location, duration, category, isPublic);
+    }
+
+    private InitiativeCategory showInitiativeCategoryMenu ( ) {
+        InitiativeCategory.printNumberedOptions();
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        return switch (choice) {
+            case 1 -> InitiativeCategory.SOCIAL_GATHERING;
+            case 2 -> InitiativeCategory.FITNESS;
+            case 3 -> InitiativeCategory.SELLING;
+            case 4 -> InitiativeCategory.SHARING;
+            case 5 -> InitiativeCategory.VOLUNTEERING;
+            default -> InitiativeCategory.OTHER;
+        };
+    }
+
+    private boolean showVisibilityMenu() {
+        System.out.println("Visibility:");
+        System.out.println("-----------------------------------------------");
+        System.out.println("1. Public");
+        System.out.println("2. Neighbourhood");
+        System.out.println("Please select an option: ");
+        System.out.println("-----------------------------------------------");
+        int visibilityChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        return switch (visibilityChoice) {
+            case 1 -> true;
+            case 2 -> false;
+            default -> false;
+        };
     }
     
     private void alterAdminStatus ( ) {

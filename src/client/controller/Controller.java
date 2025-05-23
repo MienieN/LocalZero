@@ -83,14 +83,24 @@ public class Controller {
         connectionControllerClient.sendObject(biking);
     }
 
-    public void usedPublicTransport(int km) {
+    public void usedPublicTransport (int km) {
         Action publicTransport = new PublicTransport(km, user);
         connectionControllerClient.sendObject(publicTransport);
     }
 
-    public void composting(int foodwaste) {
+    public void composting (int foodwaste) {
         Action composting = new Composting(foodwaste, user);
         connectionControllerClient.sendObject(composting);
+    }
+
+    public void createInitiative (String title, String description, String location, String duration, InitiativeCategory category, boolean isPublic) {
+        IInitiative initiative = new Initiative(user, isPublic);
+        initiative.setTitle(title);
+        initiative.setDescription(description);
+        initiative.setLocation(location);
+        initiative.setDuration(duration);
+        initiative.setCategory(category);
+        connectionControllerClient.sendObject(initiative);
     }
     
     public void setLoggedInUser (User user ) {

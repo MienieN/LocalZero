@@ -31,8 +31,8 @@ public class Initiative implements IInitiative {
         this.category = category;
     }
 
-    public void setIsPublic(boolean visibility) {
-        this.isPublic = visibility;
+    public void setIsPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 
     @Override
