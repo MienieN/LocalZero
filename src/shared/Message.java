@@ -19,6 +19,7 @@ public class Message implements IMessage {
         this.type = type;
     }
     
+    @Override
     public MessageType getType ( ) {
         return type;
     }

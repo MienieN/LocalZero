@@ -9,6 +9,5 @@ public interface Action extends Serializable {
     void calculateSavedCo2();
 
     int getSavedCo2();
-
     User getUser();
 }

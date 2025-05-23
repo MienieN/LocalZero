@@ -6,8 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.*;
 
-// TODO: when creating a new user, should validate that the username is not already in use
-
 /**
  Handles the connection to the PostgreSQL database and user authentication queries.
  */
