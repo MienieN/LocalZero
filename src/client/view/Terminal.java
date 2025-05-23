@@ -69,6 +69,8 @@ public class Terminal {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Biking");
         System.out.println("2. Composting");
+        System.out.println("3. Public Transport");
+        System.out.println("4. Planting Trees");
         System.out.println("0. Back");
         System.out.println("Please select an option: ");
         System.out.println("-----------------------------------------------");
@@ -81,17 +83,25 @@ public class Terminal {
                 System.out.println("How far did you bike? (km)");
                 int kilometers = scanner.nextInt();
                 scanner.nextInt(); //newline char bullshit
-                System.out.println("Thanks for biking!");
                 controller.goneBiking(kilometers);
+                System.out.println("Thanks for biking!");
                 break;
             case 2:
                 System.out.println("How much food waste did you compost? (kg)");
-                int foodWaste = scanner.nextInt();
+                int foodwaste = scanner.nextInt();
                 scanner.nextInt(); //newline char bullshit
+                controller.composting(foodwaste);
                 System.out.println("Thanks for composting!");
                 break;
+            case 3:
+                System.out.println("How far did you go? (km)");
+                int km = scanner.nextInt();
+                scanner.nextInt();
+                controller.usedPublicTransport(km);
+                System.out.println("Thanks for choosing public transport!");
+                break;
             case 0:
-                
+                showMenu();
                 break;
         }
         showMenu();

@@ -82,6 +82,16 @@ public class Controller {
         Action biking = new Biking(kilometers, user);
         connectionControllerClient.sendObject(biking);
     }
+
+    public void usedPublicTransport(int km) {
+        Action publicTransport = new PublicTransport(km, user);
+        connectionControllerClient.sendObject(publicTransport);
+    }
+
+    public void composting(int foodwaste) {
+        Action composting = new Composting(foodwaste, user);
+        connectionControllerClient.sendObject(composting);
+    }
     
     public void setLoggedInUser (User user ) {
         this.user = user;
@@ -95,4 +105,5 @@ public class Controller {
     public void alterAdminStatus (IsAdminStatus admin) {
         connectionControllerClient.sendObject(admin);
     }
+
 }
