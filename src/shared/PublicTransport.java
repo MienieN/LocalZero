@@ -2,11 +2,13 @@ package shared;
 
 public class PublicTransport extends ActionAbstract {
     private int savedCo2;
-    private User user;
+    private String username;
+    private String location;
     private int kilometers;
 
-    public PublicTransport(int kilometers, User user) {
-        this.user = user;
+    public PublicTransport(int kilometers, String username, String location) {
+        this.username = username;
+        this.location = location;
         this.kilometers = kilometers;
 
         performAction();
@@ -23,11 +25,21 @@ public class PublicTransport extends ActionAbstract {
     }
 
     @Override
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
     }
 
     public int getKilometers() {
         return kilometers;
+    }
+
+    public String toString() {
+        return username + " travelled " + kilometers + "km by public transport, saving "
+                + savedCo2 + "kg CO2!";
     }
 }

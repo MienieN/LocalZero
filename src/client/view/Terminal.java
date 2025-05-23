@@ -114,7 +114,7 @@ public class Terminal {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Log Sustainability action");
         System.out.println("2. Create initiative");
-        System.out.println("3. View forum");
+        System.out.println("3. View feed");
         System.out.println("4. Check neighbourhood CO2 saved");
 
 
@@ -138,10 +138,9 @@ public class Terminal {
                 createInitiative();
                 break;
             case 3:
-                // TODO Allow users to view initiatives and local actions
+                showFeedMenu();
                 break;
             case 4:
-                // TODO Allow users to view their own neighbourhoods CO2 stats
                 getNeighbourhoodCO2Stats();
                 break;
             case 5:
@@ -166,6 +165,31 @@ public class Terminal {
             case 0:
                 System.exit(0);
                 break;
+        }
+    }
+
+    private void showFeedMenu() {
+        System.out.println("-----------------------------------------------");
+        System.out.println("1. View latest actions");
+        System.out.println("2. View latest initiatives");
+        System.out.println("0. Back");
+        System.out.println("Please select an option: ");
+        System.out.println("-----------------------------------------------");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (choice) {
+            case 1:
+                controller.viewFeed("actions");
+                showFeedMenu();
+                break;
+            case 2:
+                controller.viewFeed("initiatives");
+                showFeedMenu();
+                break;
+            default:
+                showMenu();
         }
     }
 

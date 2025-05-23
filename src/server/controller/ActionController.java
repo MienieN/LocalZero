@@ -24,7 +24,7 @@ public class ActionController {
      * @throws SQLException if a database access error occurs
      */
     public void doAction(Action object) throws SQLException {
-        String neighbourhoodName = object.getUser().getLocation();
+        String neighbourhoodName = object.getLocation();
         int actionSavedCO2 = object.getSavedCo2();
 
         if (!neighbourhoodExists(neighbourhoodName)) {
