@@ -5,6 +5,7 @@ public class PlantTrees extends ActionAbstract{
     private String username;
     private String location;
     private int treesPlanted;
+    private int likes = 0;
 
     public PlantTrees(int treesPlanted, String username, String location) {
         this.username = username;
@@ -33,11 +34,21 @@ public class PlantTrees extends ActionAbstract{
         return location;
     }
 
+    @Override
+    public void likeAction() {
+        likes++;
+    }
+
+    @Override
+    public int getLikes() {
+        return likes;
+    }
+
     public int getTreesPlanted() {
         return treesPlanted;
     }
 
     public String toString() {
-        return username+ " planted " + treesPlanted + " trees, saving " + savedCo2 + "kg CO2!";
+        return username+ " planted " + treesPlanted + " trees, saving " + savedCo2 + "kg CO2! Likes: " + likes;
     }
 }

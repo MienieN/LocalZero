@@ -5,6 +5,7 @@ public class PublicTransport extends ActionAbstract {
     private String username;
     private String location;
     private int kilometers;
+    private int likes;
 
     public PublicTransport(int kilometers, String username, String location) {
         this.username = username;
@@ -34,12 +35,22 @@ public class PublicTransport extends ActionAbstract {
         return location;
     }
 
+    @Override
+    public void likeAction() {
+        likes++;
+    }
+
+    @Override
+    public int getLikes() {
+        return likes;
+    }
+
     public int getKilometers() {
         return kilometers;
     }
 
     public String toString() {
         return username + " travelled " + kilometers + "km by public transport, saving "
-                + savedCo2 + "kg CO2!";
+                + savedCo2 + "kg CO2! Likes: " + likes;
     }
 }

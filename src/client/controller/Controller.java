@@ -151,5 +151,17 @@ public class Controller {
                 terminal.showMenu();
         }
     }
+
+    public void joinInitiative() {
+        feedController.joinInitiative(username);
+    }
+
+    public void likeAction() {
+        feedController.likeAction();
+    }
+
+    public void viewInitiativeDetails() {
+        feedController.viewInitiativeDetails();
+    }
 }
 

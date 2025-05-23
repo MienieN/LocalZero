@@ -1,8 +1,9 @@
 package shared;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public interface IInitiative {
+public interface IInitiative extends Serializable {
     String username = "";
     String title = "";
     String description = "";

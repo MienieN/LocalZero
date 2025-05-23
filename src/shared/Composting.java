@@ -4,6 +4,7 @@ public class Composting extends ActionAbstract {
     private int savedCo2;
     private String username;
     private String location;
+    private int likes = 0;
     private int kg;
 
     public Composting(int kg, String username, String location) {
@@ -34,11 +35,21 @@ public class Composting extends ActionAbstract {
         return location;
     }
 
+    @Override
+    public void likeAction() {
+        likes++;
+    }
+
+    @Override
+    public int getLikes() {
+        return likes;
+    }
+
     public int getKg() {
         return kg;
     }
 
     public String toString() {
-        return username + " composted " + kg + " kg, saving " + savedCo2 + "kg CO2!";
+        return username + " composted " + kg + " kg, saving " + savedCo2 + "kg CO2! Likes: " + likes;
     }
 }
