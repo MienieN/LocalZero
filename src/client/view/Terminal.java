@@ -75,25 +75,30 @@ public class Terminal {
             case 1:
                 System.out.println("How far did you bike? (km)");
                 int kilometers = scanner.nextInt();
-                scanner.nextInt(); //newline char bullshit
-
-
+                scanner.nextLine();
                 controller.goneBiking(kilometers);
                 System.out.println("Thanks for biking!");
                 break;
             case 2:
                 System.out.println("How much food waste did you compost? (kg)");
                 int foodwaste = scanner.nextInt();
-                scanner.nextInt(); //newline char bullshit
+                scanner.nextLine();
                 controller.composting(foodwaste);
                 System.out.println("Thanks for composting!");
                 break;
             case 3:
                 System.out.println("How far did you go? (km)");
                 int km = scanner.nextInt();
-                scanner.nextInt();
+                scanner.nextLine();
                 controller.usedPublicTransport(km);
                 System.out.println("Thanks for choosing public transport!");
+                break;
+            case 4:
+                System.out.println("How many trees did you plant?");
+                int treesPlanted = scanner.nextInt();
+                scanner.nextLine();
+                controller.plantedTrees(treesPlanted);
+                System.out.println("Thanks for planting trees!");
                 break;
             case 0:
                 showMenu();

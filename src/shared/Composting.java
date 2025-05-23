@@ -1,6 +1,6 @@
 package shared;
 
-public class Composting implements Action{
+public class Composting extends ActionAbstract {
     private int savedCo2;
     private User user;
     private int kg;
@@ -9,7 +9,7 @@ public class Composting implements Action{
         this.user = user;
         this.kg = kg;
 
-        calculateSavedCo2();
+        performAction();
     }
 
     @Override

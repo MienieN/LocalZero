@@ -1,6 +1,6 @@
 package shared;
 
-public class PublicTransport implements Action{
+public class PublicTransport extends ActionAbstract {
     private int savedCo2;
     private User user;
     private int kilometers;
@@ -8,6 +8,8 @@ public class PublicTransport implements Action{
     public PublicTransport(int kilometers, User user) {
         this.user = user;
         this.kilometers = kilometers;
+
+        performAction();
     }
 
     @Override
