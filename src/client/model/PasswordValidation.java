@@ -28,7 +28,9 @@ public class PasswordValidation implements UsersValidation {
         
         if (next == null) {
             return true;
-        } else{
+        }
+        
+        else{
             return next.validate(inputText);
         }
     }
