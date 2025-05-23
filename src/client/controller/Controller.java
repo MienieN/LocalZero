@@ -32,7 +32,7 @@ public class Controller {
         
         while (! (validateUserName.validate(login))) {
             System.out.println("Login failed");
-            terminal.startupMenu();
+            login = (Login) terminal.startupMenu();
         }
         
         if (validateUserName.validate(login)) {
