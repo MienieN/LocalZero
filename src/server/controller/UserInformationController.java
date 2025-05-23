@@ -139,4 +139,27 @@ public class UserInformationController {
         }
         
     }
+    
+    public void alterUserRole (RoleStatus object) {
+        String username = object.getUsername();
+        String role = object.getRole();
+        
+        try{
+            PreparedStatement statement = databaseConnection.getConnection().prepareStatement(
+                    "UPDATE users " +
+                            "SET roles = roles || ',' || ?" +
+                            "WHERE username = ?"
+            );
+            
+            statement.setString(1, role);
+            statement.setString(2, username);
+            
+            databaseConnection.sendUpdate(statement);
+            
+        }
+        catch (SQLException e) {
+            System.out.println("Could not update user role");
+            throw new RuntimeException(e);
+        }
+    }
 }

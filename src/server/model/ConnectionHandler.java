@@ -69,6 +69,10 @@ public class ConnectionHandler extends Thread {
         else if (object instanceof IsAdminStatus){
             userInformationController.alterAdminStatus((IsAdminStatus) object);
         }
+        else if (object instanceof RoleStatus) {
+            userInformationController.alterUserRole((RoleStatus) object);
+            
+        }
     }
     
     private void serverReceivesLogin(Login login) throws IOException {
