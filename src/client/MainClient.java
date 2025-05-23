@@ -10,7 +10,7 @@ public class MainClient {
         Terminal terminal = new Terminal();
         
         ServerConnection serverConnection = new ServerConnection("127.0.01", 741);
-        ConnectionControllerClient connectionControllerClient = new ConnectionControllerClient();
+        ConnectionControllerClient connectionControllerClient = ConnectionControllerClient.getInstance();
         
         Controller controller = new Controller();
         
