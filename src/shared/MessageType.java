@@ -6,5 +6,6 @@ public enum MessageType {
     LIKE,
     COMMENT,
     NEW_INITIATIVE,
-    DIRECT_MESSAGE
+    DIRECT_MESSAGE,
+    CO2_MESSAGE,
 }

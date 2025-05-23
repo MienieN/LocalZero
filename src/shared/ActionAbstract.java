@@ -2,7 +2,7 @@ package shared;
 
 import java.io.Serializable;
 
-public abstract class ActionAbstract implements Serializable { // TODO Serializable?
+public abstract class ActionAbstract implements Serializable {
 
     // Template method
     public final void performAction() {

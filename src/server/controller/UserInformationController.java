@@ -13,6 +13,7 @@ import java.sql.SQLException;
  */
 public class UserInformationController {
     private DatabaseConnection databaseConnection;
+    IMessage CO2message = new Message();
     
     /**
      Attempts to log in a user by validating credentials and querying the database.
@@ -161,5 +162,29 @@ public class UserInformationController {
             System.out.println("Could not update user role");
             throw new RuntimeException(e);
         }
+    }
+
+    public IMessage showCO2StatusForLocation(CO2Status object) {
+        String location = object.getLocation();
+
+        try {
+            PreparedStatement statement = databaseConnection.getConnection().prepareStatement(
+                    "SELECT co2_saved FROM neighbourhoods WHERE name = ?"
+            );
+            statement.setString(1, location);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                CO2message.setMessage(resultSet.getString("co2_saved"));
+                CO2message.setType(MessageType.CO2_MESSAGE);
+            }
+            else {
+                System.out.println("Location not found");
+            }
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return CO2message;
     }
 }

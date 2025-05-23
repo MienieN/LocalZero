@@ -56,22 +56,21 @@ public class ConnectionHandler extends Thread {
         if (object instanceof Login) {
             serverReceivesLogin((Login) object);
         }
-        
         else if(object instanceof Registration) {
             serverReceivesRegistration((Registration) object);
         }
-        
         // TODO: create a serverReceivesAction ... for future development
         else if (object instanceof Action) {
             connectionControllerServer.doAction((Action) object);
         }
-        
         else if (object instanceof IsAdminStatus){
             userInformationController.alterAdminStatus((IsAdminStatus) object);
         }
         else if (object instanceof RoleStatus) {
             userInformationController.alterUserRole((RoleStatus) object);
-            
+        }
+        else if (object instanceof CO2Status) {
+            serverSendsObject(userInformationController.showCO2StatusForLocation((CO2Status) object));
         }
     }
     
@@ -83,7 +82,7 @@ public class ConnectionHandler extends Thread {
             serverSendsObject(user);
         }
         
-        else{
+        else {
             IMessage message = new Message();
             message.setMessage("User does not exist"); // TODO update this to Login failed
             message.setType(MessageType.ERROR_MESSAGE);
@@ -104,11 +103,9 @@ public class ConnectionHandler extends Thread {
             Login login = new Login(registration.getUsername(), registration.getPassword());
             serverSendsObject(userInformationController.loginUser(login));
         }
-        
         else if (message.getType() == MessageType.ERROR_MESSAGE){
             serverSendsObject(message);
         }
-        
     }
     
     private void serverSendsObject(Object object) throws IOException {
