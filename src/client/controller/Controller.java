@@ -12,10 +12,7 @@ public class Controller {
     private User user;
     
     public Controller ( ) {
-        //placeholder user for testing
-        ArrayList <String> temp = new ArrayList <>();
-        temp.add("roles");
-        user = new User("test", "testpw", "test@email", "location", temp, false);
+    
     }
     
     public void setTerminal (Terminal terminal) {
@@ -37,7 +34,6 @@ public class Controller {
         
         if (validateUserName.validate(login.getUsername()) && validateUserPassword.validate(login.getPassword())) {
             connectionControllerClient.sendObject(login);
-            // TODO: this needs to lead to a message board or something
         }
     }
     
@@ -61,9 +57,7 @@ public class Controller {
                 validateUserLocation.validate(registration.getLocation())) {
             
             connectionControllerClient.sendObject(registration);
-            // TODO: this needs to lead to instant login.... ie message board or something
         }
-        
     }
     
     public void checkLoginScreenChoice ( ) {
@@ -72,6 +66,7 @@ public class Controller {
         if (userInformation instanceof Login) {
             login((Login) userInformation);
         }
+        
         else if (userInformation instanceof Registration) {
             register((Registration) userInformation);
             

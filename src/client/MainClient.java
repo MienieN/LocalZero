@@ -23,8 +23,7 @@ public class MainClient {
         
         terminal.setController(controller);
         
-        
-        controller.checkLoginScreenChoice();
+        controller.checkLoginScreenChoice(); // This starts the very first menu
         
     }
 }

@@ -22,11 +22,9 @@ public class Terminal {
         System.out.println("== Welcome to the LocalZero Server! ==");
         System.out.println("1. Log in");
         System.out.println("2. Register");
-        System.out.println("0. Logout");
+        System.out.println("0. Exit");
         System.out.println("Please select an option: ");
         System.out.println("-----------------------------------------------");
-        
-        //scanner = new Scanner(System.in);     //TODO keep this for safety sake, scanners be dumb
         
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
@@ -76,12 +74,14 @@ public class Terminal {
         int choice = scanner.nextInt();
         //scanner.nextInt(); //newline char bullshit
         
-        switch (choice){
+        switch (choice) {
             case 1:
                 System.out.println("How far did you bike? (km)");
                 int kilometers = scanner.nextInt();
                 scanner.nextInt(); //newline char bullshit
+                
                 System.out.println("Thanks for biking!");
+                
                 controller.goneBiking(kilometers);
                 break;
             case 2:
@@ -100,12 +100,13 @@ public class Terminal {
     public void showMenu ( ) {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Log Sustainability action");
-        System.out.println("2. View forum");
-        System.out.println("3. Check neighbourhood achievements");
+        System.out.println("2. Initiatives");
+        System.out.println("3. View forum");
+        System.out.println("4. Check neighbourhood achievements");
         
-        if (controller.getUser().getIsAdmin()){
-            System.out.println("4. Set user roles");
-            System.out.println("5. Set user admin status");
+        if (controller.getUser().getIsAdmin()) {
+            System.out.println("5. Set user roles");
+            System.out.println("6. Set user admin status");
         }
         
         System.out.println("0. Logout");
@@ -115,7 +116,7 @@ public class Terminal {
         int choice = scanner.nextInt();
         scanner.nextLine(); //scanner newline char bullshit
         
-        switch (choice){
+        switch (choice) {
             case 1:
                 showSustainabilityMenu();
                 break;
@@ -124,12 +125,14 @@ public class Terminal {
             case 3:
                 break;
             case 4:
-                if (controller.getUser().getIsAdmin()){
+                break;
+            case 5:
+                if (controller.getUser().getIsAdmin()) {
                 
                 }
                 break;
-            case 5:
-                if (controller.getUser().getIsAdmin()){
+            case 6:
+                if (controller.getUser().getIsAdmin()) {
                     alterAdminStatus();
                 }
                 break;
@@ -151,9 +154,9 @@ public class Terminal {
             System.out.println("Type 'True' update user to admin status");
             System.out.println("Type 'False' to remove admin status");
             adminStatus = scanner.nextLine();
-        } while (!adminStatus.equals("True") && !adminStatus.equals("False"));
+        } while (! adminStatus.equals("True") && ! adminStatus.equals("False"));
         
-        if (adminStatus.equals("True")){
+        if (adminStatus.equals("True")) {
             isAdmin = true;
         }
         
@@ -164,7 +167,7 @@ public class Terminal {
         showMenu();
     }
     
-    public void setController(Controller controller){
+    public void setController (Controller controller) {
         this.controller = controller;
     }
 }

@@ -36,7 +36,7 @@ public class ServerConnection extends Thread{
                 Object object = ois.readObject();
                 connectionControllerClient.inputReceived(object);
             } catch (IOException | ClassNotFoundException e) {
-                throw new RuntimeException(e); // TODO: potentially blank this out
+                throw new RuntimeException(e);
             }
         }
     }
