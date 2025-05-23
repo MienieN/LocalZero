@@ -2,21 +2,15 @@ package shared;
 
 import java.util.List;
 
-public abstract class CommunityMessage {
-    private String text;
+public abstract class CommunityMessage extends Message {
+    private User sender;
     private List<User> recipients;
 
-    public CommunityMessage (String text, List<User> recipients) {
-        this.text = text;
+    public CommunityMessage (String text, MessageType type, User sender, List<User> recipients) {
+        super.setMessage(text);
+        super.setType(type);
+        this.sender = sender;
         this.recipients = recipients;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public List<User> getRecipients() {
@@ -27,5 +21,7 @@ public abstract class CommunityMessage {
         this.recipients = recipients;
     }
 
-    public abstract void displayMessage();
+    public User getSender() {
+        return sender;
+    }
 }

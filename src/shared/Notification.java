@@ -3,22 +3,10 @@ package shared;
 import java.util.List;
 
 public class Notification extends CommunityMessage {
-    private NotificationType type;
-    private String sender;
     private String originalPostTitle;
-    public Notification(String text, List<User> recipients, NotificationType type, String sender, String originalPostTitle) {
-        super(text, recipients);
-        this.type = type;
-        this.sender = sender;
+    public Notification(String text, MessageType type, User sender, List<User> recipients, String originalPostTitle) {
+        super(text, type, sender, recipients);
         this.originalPostTitle = originalPostTitle;
-    }
-
-    public NotificationType getType() {
-        return type;
-    }
-
-    public String getSender() {
-        return sender;
     }
 
     public String getOriginalPostTitle() {
@@ -27,14 +15,14 @@ public class Notification extends CommunityMessage {
 
     @Override
     public void displayMessage() {
-        switch (type) {
-            case COMMENT -> System.out.println("--- New comment on " + originalPostTitle + " from " + sender + " ---");
+        switch (super.getType()) {
+            case COMMENT -> System.out.println("--- New comment on " + originalPostTitle + " from " + super.getSender() + " ---");
             case LIKE -> {
-                System.out.println("--- Your post " + originalPostTitle + " was liked by " + sender + " ---");
+                System.out.println("--- Your post " + originalPostTitle + " was liked by " + super.getSender() + " ---");
                 return;
             }
             case NEW_INITIATIVE -> System.out.println("--- New Initiative ---");
         }
-        System.out.println(super.getText());
+        super.displayMessage();
     }
 }
