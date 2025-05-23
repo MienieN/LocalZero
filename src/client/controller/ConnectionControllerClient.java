@@ -8,6 +8,14 @@ import shared.User;
 public class ConnectionControllerClient {
     private ServerConnection serverConnection;
     private Controller controller;
+    private static ConnectionControllerClient instance;
+
+    public static ConnectionControllerClient getInstance() {
+        if (instance == null) {
+            instance = new ConnectionControllerClient();
+        }
+        return instance;
+    }
     
     public void inputReceived(Object object) {
         if (object instanceof Message) {

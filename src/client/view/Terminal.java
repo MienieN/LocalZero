@@ -9,9 +9,13 @@ public class Terminal {
     Scanner scanner = new Scanner(System.in);
     
     private Controller controller;
-    
-    public Terminal ( ) {
-    
+    private static Terminal instance;
+
+    public static Terminal getInstance() {
+        if (instance == null) {
+            instance = new Terminal();
+        }
+        return instance;
     }
     
     public UserInformation startupMenu ( ) {
@@ -142,7 +146,11 @@ public class Terminal {
                 break;
             case 5:
                 if (controller.getUser().getIsAdmin()) {
-
+                    alterUserRoles();
+                }
+                else{
+                    System.out.println("Invalid choice");
+                    showMenu();
                 }
                 break;
 
@@ -150,13 +158,17 @@ public class Terminal {
                 if (controller.getUser().getIsAdmin()) {
                     alterAdminStatus();
                 }
+                else{
+                    System.out.println("Invalid choice");
+                    showMenu();
+                }
                 break;
             case 0:
                 System.exit(0);
                 break;
         }
     }
-
+    
     private void createInitiative ( ) {
         System.out.println("Creating a new Initiative. Information required.");
         System.out.println("Title: ");
@@ -238,6 +250,24 @@ public class Terminal {
         
         showMenu();
     }
+    
+    private void alterUserRoles ( ) {
+        RoleStatus status = new RoleStatus();
+        
+        System.out.println("Which user would you like to change: ");
+        String username = scanner.nextLine();
+        
+        System.out.println("Type the role the user should have: ");
+        String role = scanner.nextLine();
+        
+        status.setUsername(username);
+        status.setRole(role);
+        
+        controller.alterUserRole(status);
+        
+        showMenu();
+    }
+    
     
     public void setController (Controller controller) {
         this.controller = controller;

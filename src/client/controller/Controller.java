@@ -22,11 +22,13 @@ public class Controller {
     public void login (Login login) {
         UsersValidation validateUserName = new UsernameValidation();
         UsersValidation validateUserPassword = new PasswordValidation();
+        
+        // Chain of Responsibility
         validateUserName.setNext(validateUserPassword);
         
         while (! (validateUserName.validate(login))) {
             System.out.println("Login failed");
-            terminal.startupMenu();
+            login = (Login) terminal.startupMenu();
         }
         
         if (validateUserName.validate(login)) {
@@ -40,6 +42,7 @@ public class Controller {
         UsersValidation validateUserEmail = new EmailValidation();
         UsersValidation validateUserLocation = new LocationValidation();
         
+        // Chain of Responsibility
         validateUserName.setNext(validateUserPassword);
         validateUserPassword.setNext(validateUserEmail);
         validateUserEmail.setNext(validateUserLocation);
@@ -108,4 +111,10 @@ public class Controller {
     public void alterAdminStatus (IsAdminStatus admin) {
         connectionControllerClient.sendObject(admin);
     }
+
+    
+    public void alterUserRole (RoleStatus status) {
+        connectionControllerClient.sendObject(status);
+    }
 }
+

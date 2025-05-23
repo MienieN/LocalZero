@@ -12,6 +12,14 @@ import java.sql.*;
 public class DatabaseConnection {
     private final String databasePassword; // The password used for the database connection, read from a file.
     private Connection connection; // The active database connection.
+    private static DatabaseConnection instance = null;
+
+    public static DatabaseConnection getInstance() {
+        if (instance == null){
+            instance = new DatabaseConnection();
+        }
+        return instance;
+    }
     
     /**
      Constructs a new {@code DatabaseConnection} and establishes a connection

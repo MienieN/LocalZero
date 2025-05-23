@@ -117,4 +117,8 @@ public class User implements Serializable {
     public ArrayList <String> getRoles ( ) {
         return roles;
     }
+
+    public String toString() {
+        return username;
+    }
 }

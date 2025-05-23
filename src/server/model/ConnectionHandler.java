@@ -69,6 +69,10 @@ public class ConnectionHandler extends Thread {
         else if (object instanceof IsAdminStatus){
             userInformationController.alterAdminStatus((IsAdminStatus) object);
         }
+        else if (object instanceof RoleStatus) {
+            userInformationController.alterUserRole((RoleStatus) object);
+            
+        }
     }
     
     private void serverReceivesLogin(Login login) throws IOException {
@@ -81,7 +85,7 @@ public class ConnectionHandler extends Thread {
         
         else{
             IMessage message = new Message();
-            message.setMessage("User does not exist");
+            message.setMessage("User does not exist"); // TODO update this to Login failed
             message.setType(MessageType.ERROR_MESSAGE);
             
             serverSendsObject(message);
