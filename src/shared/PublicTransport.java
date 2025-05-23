@@ -1,33 +1,27 @@
 package shared;
 
-public class Biking implements Action{
+public class PublicTransport implements Action{
     private int savedCo2;
     private User user;
     private int kilometers;
 
-    public Biking(int kilometers, User user){
+    public PublicTransport(int kilometers, User user) {
         this.user = user;
         this.kilometers = kilometers;
-
-        calculateSavedCo2();
     }
 
     @Override
     public void calculateSavedCo2() {
-        savedCo2 = kilometers * 4;
+        savedCo2 = kilometers * 2;
     }
 
     @Override
     public int getSavedCo2() {
-        return savedCo2;
+        return 0;
     }
 
     @Override
-    public User getUser(){
-        return user;
-    }
-
-    public int getKilometers(){
-        return kilometers;
+    public User getUser() {
+        return null;
     }
 }

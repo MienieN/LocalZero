@@ -1,29 +1,44 @@
 package client.model;
 
-public class LocationValidation implements ValidateUsers {
+import shared.Registration;
+import shared.UserInformation;
+
+public class LocationValidation implements UsersValidation {
+    private UsersValidation next;
     
     @Override
-    public boolean validate (String inputText) {
-        if (inputText == null) {
+    public boolean validate (UserInformation inputText) {
+        String location = ((Registration)inputText).getLocation();
+        
+        if (location == null) {
             System.out.println("Invalid Location");
             return false;
         }
-        if (inputText.isEmpty()) {
+        if (location.isEmpty()) {
             System.out.println("Invalid Location");
             return false;
         }
-        if (inputText.isBlank()) {
+        if (location.isBlank()) {
             System.out.println("Invalid Location");
             return false;
         }
-        if (inputText.length() < 3 || inputText.length() > 16) {
+        if (location.length() < 3 || location.length() > 16) {
             System.out.println("Invalid Location");
             return false;
         }
-        if (!inputText.matches("[a-zA-Z ]*")) {
+        if (!location.matches("[a-zA-Z ]*")) {
             System.out.println("Invalid Location");
             return false;
         }
-        return true;
+        
+        if (next == null) {
+            return true;
+        } else{
+            return next.validate(inputText);
+        }
+    }
+    
+    public void setNext (UsersValidation next) {
+        this.next = next;
     }
 }

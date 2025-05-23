@@ -21,6 +21,9 @@ public class MainClient {
         controller.setTerminal(terminal);
         controller.setConnectionController(connectionControllerClient);
         
-        controller.checkLoginScreenChoice();
+        terminal.setController(controller);
+        
+        controller.checkLoginScreenChoice(); // This starts the very first menu
+        
     }
 }

@@ -1,26 +1,40 @@
 package client.model;
 
-public class PasswordValidation implements ValidateUsers {
+import shared.UserInformation;
+
+public class PasswordValidation implements UsersValidation {
+    private UsersValidation next;
     
     @Override
-    public boolean validate (String inputText) {
-        if (inputText == null) {
+    public boolean validate (UserInformation inputText) {
+        String password = inputText.getPassword();
+        
+        if (password == null) {
             System.out.println("Invalid Password");
             return false;
         }
-        if (inputText.isEmpty()) {
+        if (password.isEmpty()) {
             System.out.println("Invalid Password");
             return false;
         }
-        if (inputText.isBlank()) {
+        if (password.isBlank()) {
             System.out.println("Invalid Password");
             return false;
         }
-        if (inputText.length() < 6 || inputText.length() > 16) {
+        if (password.length() < 6 || password.length() > 16) {
             System.out.println("Invalid Password");
             return false;
         }
-        return true;
+        
+        if (next == null) {
+            return true;
+        } else{
+            return next.validate(inputText);
+        }
+    }
+    
+    public void setNext (UsersValidation next) {
+        this.next = next;
     }
 }
     
