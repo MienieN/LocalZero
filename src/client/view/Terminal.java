@@ -1,10 +1,7 @@
 package client.view;
 
 import client.controller.Controller;
-import shared.IsAdminStatus;
-import shared.Login;
-import shared.Registration;
-import shared.UserInformation;
+import shared.*;
 
 import java.util.Scanner;
 
@@ -58,15 +55,15 @@ public class Terminal {
                 System.exit(0);
                 return null;
         }
-        
         return null;
     }
-    
-    
+
     public void showSustainabilityMenu ( ) {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Biking");
         System.out.println("2. Composting");
+        System.out.println("3. Public Transport");
+        System.out.println("4. Planting Trees");
         System.out.println("0. Back");
         System.out.println("Please select an option: ");
         System.out.println("-----------------------------------------------");
@@ -79,58 +76,71 @@ public class Terminal {
                 System.out.println("How far did you bike? (km)");
                 int kilometers = scanner.nextInt();
                 scanner.nextInt(); //newline char bullshit
-                
-                System.out.println("Thanks for biking!");
-                
+
+
                 controller.goneBiking(kilometers);
+                System.out.println("Thanks for biking!");
                 break;
             case 2:
                 System.out.println("How much food waste did you compost? (kg)");
-                int foodWaste = scanner.nextInt();
+                int foodwaste = scanner.nextInt();
                 scanner.nextInt(); //newline char bullshit
+                controller.composting(foodwaste);
                 System.out.println("Thanks for composting!");
                 break;
+            case 3:
+                System.out.println("How far did you go? (km)");
+                int km = scanner.nextInt();
+                scanner.nextInt();
+                controller.usedPublicTransport(km);
+                System.out.println("Thanks for choosing public transport!");
+                break;
             case 0:
-                
+                showMenu();
                 break;
         }
         showMenu();
     }
-    
+
     public void showMenu ( ) {
         System.out.println("-----------------------------------------------");
         System.out.println("1. Log Sustainability action");
-        System.out.println("2. Initiatives");
+        System.out.println("2. Create initiative");
         System.out.println("3. View forum");
-        System.out.println("4. Check neighbourhood achievements");
-        
+        System.out.println("4. Check neighbourhood CO2 saved");
+
+
         if (controller.getUser().getIsAdmin()) {
             System.out.println("5. Set user roles");
             System.out.println("6. Set user admin status");
         }
-        
+
         System.out.println("0. Logout");
         System.out.println("Please select an option: ");
         System.out.println("-----------------------------------------------");
-        
+
         int choice = scanner.nextInt();
         scanner.nextLine(); //scanner newline char bullshit
-        
+
         switch (choice) {
             case 1:
                 showSustainabilityMenu();
                 break;
             case 2:
+                createInitiative();
                 break;
             case 3:
+
                 break;
             case 4:
+
                 break;
             case 5:
                 if (controller.getUser().getIsAdmin()) {
-                
+
                 }
                 break;
+
             case 6:
                 if (controller.getUser().getIsAdmin()) {
                     alterAdminStatus();
@@ -140,6 +150,63 @@ public class Terminal {
                 System.exit(0);
                 break;
         }
+    }
+
+    private void createInitiative ( ) {
+        System.out.println("Creating a new Initiative. Information required.");
+        System.out.println("Title: ");
+        String title = scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Description: ");
+        String description = scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Location: ");
+        String location = scanner.nextLine();
+        scanner.nextLine();
+
+        System.out.println("Duration: ");
+        String duration = scanner.nextLine();
+        scanner.nextLine();
+
+        InitiativeCategory category = showInitiativeCategoryMenu();
+
+        boolean isPublic = showVisibilityMenu();
+
+        controller.createInitiative(title, description, location, duration, category, isPublic);
+    }
+
+    private InitiativeCategory showInitiativeCategoryMenu ( ) {
+        InitiativeCategory.printNumberedOptions();
+        int choice = scanner.nextInt();
+        scanner.nextLine();
+
+        return switch (choice) {
+            case 1 -> InitiativeCategory.SOCIAL_GATHERING;
+            case 2 -> InitiativeCategory.FITNESS;
+            case 3 -> InitiativeCategory.SELLING;
+            case 4 -> InitiativeCategory.SHARING;
+            case 5 -> InitiativeCategory.VOLUNTEERING;
+            default -> InitiativeCategory.OTHER;
+        };
+    }
+
+    private boolean showVisibilityMenu() {
+        System.out.println("Visibility:");
+        System.out.println("-----------------------------------------------");
+        System.out.println("1. Public");
+        System.out.println("2. Neighbourhood");
+        System.out.println("Please select an option: ");
+        System.out.println("-----------------------------------------------");
+        int visibilityChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        return switch (visibilityChoice) {
+            case 1 -> true;
+            case 2 -> false;
+            default -> false;
+        };
     }
     
     private void alterAdminStatus ( ) {
