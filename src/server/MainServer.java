@@ -14,7 +14,7 @@ public class MainServer {
         UserInformationController userInformationController = new UserInformationController();
         ActionController actionController = new ActionController();
         
-        DatabaseConnection databaseConnection = new DatabaseConnection();
+        DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
         userInformationController.setDatabaseConnection(databaseConnection);
         
         actionController.setDatabaseConnection(databaseConnection);

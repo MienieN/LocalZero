@@ -7,10 +7,10 @@ import client.view.Terminal;
 
 public class MainClient {
     public static void main(String[] args) {
-        Terminal terminal = new Terminal();
+        Terminal terminal = Terminal.getInstance();
         
-        ServerConnection serverConnection = new ServerConnection("127.0.01", 741);
-        ConnectionControllerClient connectionControllerClient = new ConnectionControllerClient();
+        ServerConnection serverConnection = ServerConnection.getInstance("127.0.01", 741);
+        ConnectionControllerClient connectionControllerClient = ConnectionControllerClient.getInstance();
         
         Controller controller = new Controller();
         
