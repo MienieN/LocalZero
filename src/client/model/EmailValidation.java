@@ -1,28 +1,43 @@
 package client.model;
 
+import shared.Registration;
+import shared.UserInformation;
+
 public class EmailValidation implements UsersValidation {
+    private UsersValidation next;
     @Override
-    public boolean validate (String inputText) {
-        if (inputText == null) {
+    public boolean validate (UserInformation inputText) {
+        String email = ((Registration)inputText).getEmail();
+        
+        if (email == null) {
             System.out.println("Invalid email address");
             return false;
         }
-        if (inputText.isEmpty()) {
+        if (email.isEmpty()) {
             System.out.println("Invalid email address");
             return false;
         }
-        if (inputText.isBlank()) {
+        if (email.isBlank()) {
             System.out.println("Invalid email address");
             return false;
         }
-        if (inputText.length() < 11 || inputText.length() > 28) {
+        if (email.length() < 11 || email.length() > 28) {
             System.out.println("Invalid email address");
             return false;
         }
-        if(!inputText.contains("@")){
+        if(!email.contains("@")){
             System.out.println("Invalid email address");
             return false;
         }
-        return true;
+        
+        if (next == null) {
+            return true;
+        } else{
+            return next.validate(inputText);
+        }
+    }
+    
+    public void setNext (UsersValidation next) {
+        this.next = next;
     }
 }

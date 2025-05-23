@@ -26,13 +26,14 @@ public class Controller {
     public void login (Login login) {
         UsersValidation validateUserName = new UsernameValidation();
         UsersValidation validateUserPassword = new PasswordValidation();
+        validateUserName.setNext(validateUserPassword);
         
-        while (! (validateUserName.validate(login.getUsername()) && validateUserPassword.validate(login.getPassword()))) {
+        while (! (validateUserName.validate(login))) {
             System.out.println("Login failed");
             terminal.startupMenu();
         }
         
-        if (validateUserName.validate(login.getUsername()) && validateUserPassword.validate(login.getPassword())) {
+        if (validateUserName.validate(login)) {
             connectionControllerClient.sendObject(login);
         }
     }
@@ -43,19 +44,16 @@ public class Controller {
         UsersValidation validateUserEmail = new EmailValidation();
         UsersValidation validateUserLocation = new LocationValidation();
         
-        while (! (validateUserName.validate(registration.getUsername()) &&
-                validateUserPassword.validate(registration.getPassword()) &&
-                validateUserEmail.validate(registration.getEmail()) &&
-                validateUserLocation.validate(registration.getLocation()))) {
+        validateUserName.setNext(validateUserPassword);
+        validateUserPassword.setNext(validateUserEmail);
+        validateUserEmail.setNext(validateUserLocation);
+        
+        while (! (validateUserName.validate(registration))) {
             System.out.println("Could not create account");
             terminal.startupMenu();
         }
         
-        if (validateUserName.validate(registration.getUsername()) &&
-                validateUserPassword.validate(registration.getPassword()) &&
-                validateUserEmail.validate(registration.getEmail()) &&
-                validateUserLocation.validate(registration.getLocation())) {
-            
+        if (validateUserName.validate(registration)) {
             connectionControllerClient.sendObject(registration);
         }
     }
