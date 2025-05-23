@@ -112,9 +112,13 @@ public class Controller {
         connectionControllerClient.sendObject(admin);
     }
 
-    
     public void alterUserRole (RoleStatus status) {
         connectionControllerClient.sendObject(status);
+    }
+
+    public void viewCO2StatusForLocation(CO2Status co2Status) {
+        co2Status.setLocation(user.getLocation());
+        connectionControllerClient.sendObject(co2Status);
     }
 }
 

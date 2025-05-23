@@ -33,14 +33,11 @@ public class ConnectionControllerServer {
         this.actionController = actionController;
     }
 
-    //TODO rename this
     public void doAction(Action object) {
         try {
             actionController.doAction(object);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
-    
 }

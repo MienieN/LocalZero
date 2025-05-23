@@ -1,6 +1,7 @@
 package client.controller;
 
 import client.view.ServerConnection;
+import client.view.Terminal;
 import shared.Message;
 import shared.MessageType;
 import shared.User;
@@ -26,6 +27,12 @@ public class ConnectionControllerClient {
             
             else if (((Message) object).getType() == MessageType.SUCCESS_MESSAGE) {
                 ((Message) object).displayMessage();
+            }
+
+            else if (((Message) object).getType() == MessageType.CO2_MESSAGE) {
+                System.out.print("Kg of CO2 saved: ");
+                ((Message) object).displayMessage();
+                Terminal.getInstance().showMenu();
             }
         }
         

@@ -30,8 +30,7 @@ public class Terminal {
         int choice = scanner.nextInt();
         scanner.nextLine(); // Consume the newline character
         
-        String username;
-        String password;
+        String username, password;
         
         switch (choice) {
             case 1:
@@ -139,16 +138,17 @@ public class Terminal {
                 createInitiative();
                 break;
             case 3:
-
+                // TODO Allow users to view initiatives and local actions
                 break;
             case 4:
-
+                // TODO Allow users to view their own neighbourhoods CO2 stats
+                getNeighbourhoodCO2Stats();
                 break;
             case 5:
                 if (controller.getUser().getIsAdmin()) {
                     alterUserRoles();
                 }
-                else{
+                else {
                     System.out.println("Invalid choice");
                     showMenu();
                 }
@@ -158,7 +158,7 @@ public class Terminal {
                 if (controller.getUser().getIsAdmin()) {
                     alterAdminStatus();
                 }
-                else{
+                else {
                     System.out.println("Invalid choice");
                     showMenu();
                 }
@@ -167,6 +167,11 @@ public class Terminal {
                 System.exit(0);
                 break;
         }
+    }
+
+    private void getNeighbourhoodCO2Stats () {
+        CO2Status co2Status = new CO2Status();
+        controller.viewCO2StatusForLocation(co2Status);
     }
     
     private void createInitiative ( ) {
@@ -187,11 +192,7 @@ public class Terminal {
         String duration = scanner.nextLine();
         scanner.nextLine();
 
-        InitiativeCategory category = showInitiativeCategoryMenu();
-
-        boolean isPublic = showVisibilityMenu();
-
-        controller.createInitiative(title, description, location, duration, category, isPublic);
+        controller.createInitiative(title, description, location, duration, showInitiativeCategoryMenu(), showVisibilityMenu());
     }
 
     private InitiativeCategory showInitiativeCategoryMenu ( ) {
@@ -267,8 +268,7 @@ public class Terminal {
         
         showMenu();
     }
-    
-    
+
     public void setController (Controller controller) {
         this.controller = controller;
     }
