@@ -10,6 +10,7 @@ public class Controller {
     private Terminal terminal;
     private ConnectionControllerClient connectionControllerClient;
     private User user;
+    private ActionInitiativeStorage storage = new ActionInitiativeStorage();
     
     public void setTerminal (Terminal terminal) {
         this.terminal = terminal;
@@ -71,21 +72,25 @@ public class Controller {
     
     public void goneBiking (int kilometers){
         ActionAbstract biking = new Biking(kilometers, user);
+        storage.addAction(biking);
         connectionControllerClient.sendObject(biking);
     }
 
     public void usedPublicTransport (int km) {
         ActionAbstract publicTransport = new PublicTransport(km, user);
+        storage.addAction(publicTransport);
         connectionControllerClient.sendObject(publicTransport);
     }
 
     public void composting (int foodwaste) {
         ActionAbstract composting = new Composting(foodwaste, user);
+        storage.addAction(composting);
         connectionControllerClient.sendObject(composting);
     }
 
     public void plantedTrees(int treesPlanted) {
         ActionAbstract plantTrees = new PlantTrees(treesPlanted, user);
+        storage.addAction(plantTrees);
         connectionControllerClient.sendObject(plantTrees);
     }
 
@@ -96,6 +101,7 @@ public class Controller {
         initiative.setLocation(location);
         initiative.setDuration(duration);
         initiative.setCategory(category);
+        storage.addInitiative(initiative);
         connectionControllerClient.sendObject(initiative);
     }
     
