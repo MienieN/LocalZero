@@ -11,10 +11,6 @@ public class Controller {
     private ConnectionControllerClient connectionControllerClient;
     private User user;
     
-    public Controller ( ) {
-    
-    }
-    
     public void setTerminal (Terminal terminal) {
         this.terminal = terminal;
     }
@@ -70,23 +66,27 @@ public class Controller {
         
         else if (userInformation instanceof Registration) {
             register((Registration) userInformation);
-            
         }
     }
     
     public void goneBiking (int kilometers){
-        Action biking = new Biking(kilometers, user);
+        ActionAbstract biking = new Biking(kilometers, user);
         connectionControllerClient.sendObject(biking);
     }
 
     public void usedPublicTransport (int km) {
-        Action publicTransport = new PublicTransport(km, user);
+        ActionAbstract publicTransport = new PublicTransport(km, user);
         connectionControllerClient.sendObject(publicTransport);
     }
 
     public void composting (int foodwaste) {
-        Action composting = new Composting(foodwaste, user);
+        ActionAbstract composting = new Composting(foodwaste, user);
         connectionControllerClient.sendObject(composting);
+    }
+
+    public void plantedTrees(int treesPlanted) {
+        ActionAbstract plantTrees = new PlantTrees(treesPlanted, user);
+        connectionControllerClient.sendObject(plantTrees);
     }
 
     public void createInitiative (String title, String description, String location, String duration, InitiativeCategory category, boolean isPublic) {
@@ -111,8 +111,10 @@ public class Controller {
     public void alterAdminStatus (IsAdminStatus admin) {
         connectionControllerClient.sendObject(admin);
     }
+
     
     public void alterUserRole (RoleStatus status) {
         connectionControllerClient.sendObject(status);
     }
 }
+

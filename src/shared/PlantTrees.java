@@ -1,6 +1,6 @@
 package shared;
 
-public class PlantTrees implements Action{
+public class PlantTrees extends ActionAbstract{
     private int savedCo2;
     private User user;
     private int treesPlanted;
@@ -9,7 +9,7 @@ public class PlantTrees implements Action{
         this.treesPlanted = treesPlanted;
         this.user = user;
 
-        calculateSavedCo2();
+        performAction();
     }
 
     @Override
@@ -19,11 +19,15 @@ public class PlantTrees implements Action{
 
     @Override
     public int getSavedCo2() {
-        return 0;
+        return savedCo2;
     }
 
     @Override
     public User getUser() {
-        return null;
+        return user;
+    }
+
+    public int getTreesPlanted() {
+        return treesPlanted;
     }
 }
