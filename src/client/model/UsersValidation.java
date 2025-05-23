@@ -1,5 +1,7 @@
 package client.model;
 
+import shared.UserInformation;
+
 /**
  Interface for user input validation.
  <p>
@@ -15,5 +17,7 @@ public interface UsersValidation {
      
      @return {@code true} if the input is valid, {@code false} otherwise
      */
-    boolean validate (String inputText);
+    boolean validate (UserInformation inputText);
+    
+    void setNext(UsersValidation next);
 }
