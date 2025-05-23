@@ -11,6 +11,7 @@ public class Controller {
     private ConnectionControllerClient connectionControllerClient;
     private User user;
     private ActionInitiativeStorage storage = new ActionInitiativeStorage();
+    private ActionInitiativeTestValues actionInitiativeTestValues = new ActionInitiativeTestValues(storage, user);
     
     public void setTerminal (Terminal terminal) {
         this.terminal = terminal;
