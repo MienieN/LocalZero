@@ -4,8 +4,8 @@ import java.util.List;
 
 public class DirectMessage extends CommunityMessage {
     private boolean read;
-    public DirectMessage(String text, List<User> recipients, User sender) {
-        super(text, sender, recipients);
+    public DirectMessage(String text, MessageType type, User sender, List<User> recipients) {
+        super(text, type, sender, recipients);
     }
 
     public boolean isRead() {
