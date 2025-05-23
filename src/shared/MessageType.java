@@ -1,6 +1,6 @@
 package shared;
 
-public enum ServerMessageType {
+public enum MessageType {
     ERROR_MESSAGE,
     SUCCESS_MESSAGE,
 }
