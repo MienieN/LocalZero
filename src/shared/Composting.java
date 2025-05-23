@@ -2,11 +2,13 @@ package shared;
 
 public class Composting extends ActionAbstract {
     private int savedCo2;
-    private User user;
+    private String username;
+    private String location;
     private int kg;
 
-    public Composting(int kg, User user) {
-        this.user = user;
+    public Composting(int kg, String username, String location) {
+        this.username = username;
+        this.location = location;
         this.kg = kg;
 
         performAction();
@@ -23,8 +25,13 @@ public class Composting extends ActionAbstract {
     }
 
     @Override
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
     }
 
     public int getKg() {
@@ -32,6 +39,6 @@ public class Composting extends ActionAbstract {
     }
 
     public String toString() {
-        return user.getUsername() + " composted " + kg + " kg, saving " + savedCo2 + "kg CO2!";
+        return username + " composted " + kg + " kg, saving " + savedCo2 + "kg CO2!";
     }
 }

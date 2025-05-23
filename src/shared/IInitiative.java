@@ -3,7 +3,7 @@ package shared;
 import java.util.ArrayList;
 
 public interface IInitiative {
-    User creator = null;
+    String username = "";
     String title = "";
     String description = "";
     String location = "";
@@ -18,14 +18,14 @@ public interface IInitiative {
     void setDuration(String duration);
     void setCategory(InitiativeCategory category);
     void setIsPublic(boolean isPublic);
-    void addParticipant(User participant);
+    void addParticipant(String participant);
 
-    User getCreator();
+    String getUsername();
     String getTitle();
     String getDescription();
     String getLocation();
     String getDuration();
     Enum getCategory();
     boolean getIsPublic();
-    ArrayList<User> getParticipants();
+    ArrayList<String> getParticipants();
 }

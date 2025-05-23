@@ -2,12 +2,13 @@ package shared;
 
 public class PlantTrees extends ActionAbstract{
     private int savedCo2;
-    private User user;
+    private String username;
+    private String location;
     private int treesPlanted;
 
-    public PlantTrees(int treesPlanted, User user) {
+    public PlantTrees(int treesPlanted, String username, String location) {
+        this.username = username;
         this.treesPlanted = treesPlanted;
-        this.user = user;
 
         performAction();
     }
@@ -23,8 +24,13 @@ public class PlantTrees extends ActionAbstract{
     }
 
     @Override
-    public User getUser() {
-        return user;
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
     }
 
     public int getTreesPlanted() {
@@ -32,6 +38,6 @@ public class PlantTrees extends ActionAbstract{
     }
 
     public String toString() {
-        return user.getUsername() + " planted " + treesPlanted + " trees, saving " + savedCo2 + "kg CO2!";
+        return username+ " planted " + treesPlanted + " trees, saving " + savedCo2 + "kg CO2!";
     }
 }

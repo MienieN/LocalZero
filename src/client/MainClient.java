@@ -20,6 +20,7 @@ public class MainClient {
         serverConnection.setConnectionControllerClient(connectionControllerClient);
         controller.setTerminal(terminal);
         controller.setConnectionController(connectionControllerClient);
+        controller.setFeedController();
         
         terminal.setController(controller);
         

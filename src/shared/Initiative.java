@@ -3,16 +3,16 @@ package shared;
 import java.util.ArrayList;
 
 public class Initiative implements IInitiative {
-    private User creator;
+    private String username;
     private String title, description, location, duration;
     private InitiativeCategory category;
     private boolean isPublic;
-    private ArrayList<User> participants = new ArrayList<>();
+    private ArrayList<String> participants = new ArrayList<>();
 
-    public Initiative(User creator, boolean isPublic) {
-        this.creator = creator;
+    public Initiative(String username, boolean isPublic) {
+        this.username = username;
         this.isPublic = isPublic;
-        participants.add(creator);
+        participants.add(username);
     }
 
     public void setTitle(String title) {
@@ -39,47 +39,52 @@ public class Initiative implements IInitiative {
         this.isPublic = isPublic;
     }
 
-    public void addParticipant(User participant) {
+    public void addParticipant(String participant) {
         participants.add(participant);
     }
 
     @Override
-    public User getCreator() {
-        return null;
+    public String getUsername() {
+        return username;
     }
 
     @Override
     public String getTitle() {
-        return "";
+        return title;
     }
 
     @Override
     public String getDescription() {
-        return "";
+        return description;
     }
 
     @Override
     public String getLocation() {
-        return "";
+        return location;
     }
 
     @Override
     public String getDuration() {
-        return "";
+        return duration;
     }
 
     @Override
     public Enum getCategory() {
-        return null;
+        return category;
     }
 
     @Override
     public boolean getIsPublic() {
-        return false;
+        return isPublic;
     }
 
     @Override
-    public ArrayList<User> getParticipants() {
+    public ArrayList<String> getParticipants() {
         return participants;
+    }
+
+    @Override
+    public String toString() {
+        return title + " - " + username;
     }
 }
