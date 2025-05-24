@@ -4,6 +4,8 @@ import client.model.*;
 import client.view.Terminal;
 import shared.*;
 
+import java.util.ArrayList;
+
 public class Controller {
     private Terminal terminal;
     private ConnectionControllerClient connectionControllerClient;
@@ -166,11 +168,11 @@ public class Controller {
         return feedController;
     }
 
-    /*public void createCommunityMessage(String userName, String message, MessageType type) {
+    public void createCommunityMessage(ArrayList<String> recipients, String message, MessageType type, String originalPostTitle) {
         CommunityMessage m;
         switch (type) {
-            case LIKE -> m = new Notification(null, MessageType.LIKE, userName)
+            case LIKE -> m = new Notification(null, MessageType.LIKE, username, recipients, originalPostTitle);
         }
-    }*/
+    }
 }
 

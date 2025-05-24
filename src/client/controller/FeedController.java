@@ -65,4 +65,8 @@ public class FeedController {
     public ArrayList<CommunityMessage> getMessages() {
         return messages;
     }
+
+    public ActionInitiativeStorage getStorage() {
+        return storage;
+    }
 }
