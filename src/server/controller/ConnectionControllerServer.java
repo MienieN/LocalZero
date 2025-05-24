@@ -7,9 +7,11 @@ import shared.IsAdminStatus;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConnectionControllerServer {
-    private ArrayList<ConnectionHandler> connectedUsers = new ArrayList<>();
+    private Map<String, ConnectionHandler> connectedUsers = new HashMap<>();
     private UserInformationController userLoginController;
     private ActionController actionController;
     
@@ -18,11 +20,11 @@ public class ConnectionControllerServer {
     }
 
     public void endHandler(ConnectionHandler connectionHandler) {
-        connectedUsers.remove(connectionHandler);
+        connectedUsers.remove(connectionHandler.getUserName());
     }
 
     public void addHandler(ConnectionHandler connectionHandler) {
-        connectedUsers.add(connectionHandler);
+        connectedUsers.put(connectionHandler.getUserName(), connectionHandler);
     }
 
     public void setUserLoginController(UserInformationController userLoginController) {
@@ -41,7 +43,7 @@ public class ConnectionControllerServer {
         }
     }
 
-    public ArrayList<ConnectionHandler> getConnectedUsers() {
+    public Map<String, ConnectionHandler> getConnectedUsers() {
         return connectedUsers;
     }
 }

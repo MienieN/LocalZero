@@ -2,6 +2,7 @@ package server;
 
 import server.controller.ActionController;
 import server.controller.ConnectionControllerServer;
+import server.controller.MessageController;
 import server.controller.UserInformationController;
 import server.view.ClientConnection;
 import server.view.DatabaseConnection;
@@ -20,6 +21,8 @@ public class MainServer {
         actionController.setDatabaseConnection(databaseConnection);
         connectionControllerServer.setActionController(actionController);
         connectionControllerServer.setUserLoginController(userInformationController);
+
+        MessageController messageController = new MessageController(connectionControllerServer);
         
         try {
             new ClientConnection(connectionControllerServer);
