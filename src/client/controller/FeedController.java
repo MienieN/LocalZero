@@ -51,9 +51,12 @@ public class FeedController {
         storage.viewInitiativeDetails(randomNumber);
     }
 
-    public void viewDirectMessages() {
+    /**
+     * For viewing DMs, comments, likes, new initiatives
+     **/
+    public void viewCommunityMessages(MessageType type) {
         for (CommunityMessage m : messages) {
-            if (m instanceof DirectMessage) {
+            if (m.getType() == type) {
                 m.displayMessage();
             }
         }
