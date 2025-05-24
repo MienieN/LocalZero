@@ -21,8 +21,6 @@ public class MainServer {
         actionController.setDatabaseConnection(databaseConnection);
         connectionControllerServer.setActionController(actionController);
         connectionControllerServer.setUserLoginController(userInformationController);
-
-        MessageController messageController = new MessageController(connectionControllerServer);
         
         try {
             new ClientConnection(connectionControllerServer);

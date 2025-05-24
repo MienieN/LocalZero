@@ -19,7 +19,7 @@ public class MessageController implements IMessageController{
         this.server = server;
     }
     @Override
-    public void sendMessage(CommunityMessage message) {
+    public synchronized void sendMessage(CommunityMessage message) {
         Map<String, ConnectionHandler> users = server.getConnectedUsers();
         List<String> recipients = message.getRecipients();
 

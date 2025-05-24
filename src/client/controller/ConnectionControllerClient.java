@@ -2,9 +2,12 @@ package client.controller;
 
 import client.view.ServerConnection;
 import client.view.Terminal;
+import shared.CommunityMessage;
 import shared.Message;
 import shared.MessageType;
 import shared.User;
+
+import java.util.ArrayList;
 
 public class ConnectionControllerClient {
     private ServerConnection serverConnection;
@@ -33,6 +36,11 @@ public class ConnectionControllerClient {
                 System.out.print("Kg of CO2 saved: ");
                 ((Message) object).displayMessage();
                 Terminal.getInstance().showMenu();
+            }
+
+            if (object instanceof CommunityMessage) {
+                ArrayList<CommunityMessage> messages = controller.getFeedController().getMessages();
+                messages.add((CommunityMessage) object);
             }
         }
         

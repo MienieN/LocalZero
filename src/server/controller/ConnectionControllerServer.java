@@ -14,9 +14,10 @@ public class ConnectionControllerServer {
     private Map<String, ConnectionHandler> connectedUsers = new HashMap<>();
     private UserInformationController userLoginController;
     private ActionController actionController;
+    private MessageController messageController = new MessageController(this);
     
     public void createHandler(Socket socket) {
-        new ConnectionHandler(socket, this, userLoginController);
+        new ConnectionHandler(socket, this, userLoginController, messageController);
     }
 
     public void endHandler(ConnectionHandler connectionHandler) {

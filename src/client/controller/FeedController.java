@@ -1,14 +1,14 @@
 package client.controller;
 
-import shared.ActionInitiativeStorage;
-import shared.IInitiative;
-import shared.Initiative;
+import shared.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
 public class FeedController {
     private ActionInitiativeStorage storage;
+    private ArrayList<CommunityMessage> messages = new ArrayList<>();
     
     public FeedController(ActionInitiativeStorage storage) {
         this.storage = storage;
@@ -49,5 +49,17 @@ public class FeedController {
         int randomNumber = RandomGenerator.getDefault().nextInt(actions.size());
 
         storage.viewInitiativeDetails(randomNumber);
+    }
+
+    public void viewDirectMessages() {
+        for (CommunityMessage m : messages) {
+            if (m instanceof DirectMessage) {
+                m.displayMessage();
+            }
+        }
+    }
+
+    public ArrayList<CommunityMessage> getMessages() {
+        return messages;
     }
 }

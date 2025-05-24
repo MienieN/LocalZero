@@ -163,5 +163,9 @@ public class Controller {
     public void viewInitiativeDetails() {
         feedController.viewInitiativeDetails();
     }
+
+    public FeedController getFeedController() {
+        return feedController;
+    }
 }
 

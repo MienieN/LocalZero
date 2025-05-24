@@ -125,6 +125,8 @@ public class ActionInitiativeTerminal {
         System.out.println("-----------------------------------------------");
         System.out.println("1. View latest actions");
         System.out.println("2. View latest initiatives");
+        System.out.println("3. View inbox");
+        System.out.println("4. View notifications");
         System.out.println("0. Back");
         System.out.println("Please select an option: ");
         System.out.println("-----------------------------------------------");
