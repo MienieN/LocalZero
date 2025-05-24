@@ -1,27 +1,28 @@
 package shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CommunityMessage extends Message {
-    private User sender;
-    private List<User> recipients;
+    private String sender;
+    private ArrayList<String> recipients;
 
-    public CommunityMessage (String text, MessageType type, User sender, List<User> recipients) {
+    public CommunityMessage (String text, MessageType type, String sender, ArrayList<String> recipients) {
         super.setMessage(text);
         super.setType(type);
         this.sender = sender;
         this.recipients = recipients;
     }
 
-    public List<User> getRecipients() {
+    public ArrayList<String> getRecipients() {
         return recipients;
     }
 
-    public void setRecipients(List<User> recipients) {
+    public void setRecipients(ArrayList<String> recipients) {
         this.recipients = recipients;
     }
 
-    public User getSender() {
+    public String getSender() {
         return sender;
     }
 }
