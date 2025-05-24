@@ -18,8 +18,8 @@ public class Controller {
     private ActionInitiativeStorage storage = new ActionInitiativeStorage();
     private ActionInitiativeTestValues actionInitiativeTestValues = new ActionInitiativeTestValues(storage, user);
     
-    public void setTerminal (Terminal terminal) {
-        this.terminal = terminal;
+    public void setTerminal () {
+        this.terminal = Terminal.getInstance();
     }
     
     public void setConnectionController (ConnectionControllerClient connectionControllerClient) {
