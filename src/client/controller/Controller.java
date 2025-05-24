@@ -104,7 +104,7 @@ public class Controller {
         connectionControllerClient.sendObject(plantTrees);
     }
 
-    public void createInitiative (String title, String description, String location, String duration, InitiativeCategory category, boolean isPublic) {
+    public IInitiative createInitiative (String title, String description, String location, String duration, InitiativeCategory category, boolean isPublic) {
         IInitiative initiative = new Initiative(username, isPublic);
         initiative.setTitle(title);
         initiative.setDescription(description);
@@ -113,6 +113,7 @@ public class Controller {
         initiative.setCategory(category);
         storage.addInitiative(initiative);
         connectionControllerClient.sendObject(initiative);
+        return initiative;
     }
     
     public void setLoggedInUser (User user ) {
@@ -162,6 +163,21 @@ public class Controller {
 
     public void viewInitiativeDetails() {
         feedController.viewInitiativeDetails();
+    }
+
+    public FeedController getFeedController() {
+        return feedController;
+    }
+
+    public void createCommunityMessage(ArrayList<String> recipients, String message, MessageType type, String originalPostTitle) {
+        CommunityMessage m = null;
+        switch (type) {
+            case LIKE -> m = new Notification(null, MessageType.LIKE, username, recipients, originalPostTitle);
+            case COMMENT -> m = new Notification(message, MessageType.COMMENT, username, recipients, originalPostTitle);
+            case NEW_INITIATIVE -> m = new Notification(message, MessageType.NEW_INITIATIVE, username, recipients, originalPostTitle);
+            case DIRECT_MESSAGE -> m = new DirectMessage(message, MessageType.DIRECT_MESSAGE, username, recipients);
+        }
+        connectionControllerClient.sendObject(m);
     }
 }
 

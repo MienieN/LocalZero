@@ -1,6 +1,7 @@
 package server.model;
 
 import server.controller.ConnectionControllerServer;
+import server.controller.MessageController;
 import server.controller.UserInformationController;
 import shared.*;
 
@@ -17,12 +18,15 @@ public class ConnectionHandler extends Thread {
     private ObjectInputStream ois;
     private  ObjectOutputStream oos;
     private String username;
+    private MessageController messageController;
     
     public ConnectionHandler(Socket socket, ConnectionControllerServer connectionControllerServer,
-                             UserInformationController userInformationController) {
+                             UserInformationController userInformationController,
+                             MessageController messageController) {
         this.connectionControllerServer = connectionControllerServer;
         this.userInformationController = userInformationController;
         this.socket = socket;
+        this.messageController = messageController;
         try {
             ois = new ObjectInputStream(socket.getInputStream());
             oos = new ObjectOutputStream(socket.getOutputStream());
@@ -74,6 +78,9 @@ public class ConnectionHandler extends Thread {
         else if (object instanceof CO2Status) {
             serverSendsObject(userInformationController.showCO2StatusForLocation((CO2Status) object));
         }
+        else if (object instanceof CommunityMessage) {
+            messageController.sendMessage((CommunityMessage) object);
+        }
     }
     
     private void serverReceivesLogin(Login login) throws IOException {
@@ -118,8 +125,4 @@ public class ConnectionHandler extends Thread {
     public String getUserName() {
         return this.username;
     }
-
-    /*public ObjectInputStream getInputStream() {
-        return this.ois;
-    }*/
 }
