@@ -16,6 +16,7 @@ public class ConnectionHandler extends Thread {
     private UserInformationController userInformationController;
     private ObjectInputStream ois;
     private  ObjectOutputStream oos;
+    private String username;
     
     public ConnectionHandler(Socket socket, ConnectionControllerServer connectionControllerServer,
                              UserInformationController userInformationController) {
@@ -55,6 +56,7 @@ public class ConnectionHandler extends Thread {
         
         if (object instanceof Login) {
             serverReceivesLogin((Login) object);
+            this.username = ((Login) object).getUsername();
         }
         else if(object instanceof Registration) {
             serverReceivesRegistration((Registration) object);
@@ -108,8 +110,16 @@ public class ConnectionHandler extends Thread {
         }
     }
     
-    private void serverSendsObject(Object object) throws IOException {
+    public void serverSendsObject(Object object) throws IOException {
         oos.writeObject(object);
         oos.flush();
     }
+
+    public String getUserName() {
+        return this.username;
+    }
+
+    /*public ObjectInputStream getInputStream() {
+        return this.ois;
+    }*/
 }

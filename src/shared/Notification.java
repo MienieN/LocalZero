@@ -1,10 +1,11 @@
 package shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Notification extends CommunityMessage {
     private String originalPostTitle;
-    public Notification(String text, MessageType type, String sender, List<String> recipients, String originalPostTitle) {
+    public Notification(String text, MessageType type, String sender, ArrayList<String> recipients, String originalPostTitle) {
         super(text, type, sender, recipients);
         this.originalPostTitle = originalPostTitle;
     }

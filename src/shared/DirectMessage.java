@@ -1,10 +1,11 @@
 package shared;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DirectMessage extends CommunityMessage {
     private boolean read;
-    public DirectMessage(String text, MessageType type, String sender, List<String> recipients) {
+    public DirectMessage(String text, MessageType type, String sender, ArrayList<String> recipients) {
         super(text, type, sender, recipients);
     }
 
