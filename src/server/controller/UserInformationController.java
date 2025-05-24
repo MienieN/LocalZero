@@ -13,7 +13,6 @@ import java.sql.SQLException;
  */
 public class UserInformationController {
     private DatabaseConnection databaseConnection;
-    IMessage CO2message = new Message();
     
     /**
      Attempts to log in a user by validating credentials and querying the database.
@@ -173,8 +172,10 @@ public class UserInformationController {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
+                IMessage CO2message = new Message();
                 CO2message.setMessage(resultSet.getString("co2_saved"));
                 CO2message.setType(MessageType.CO2_MESSAGE);
+                return CO2message;
             }
             else {
                 System.out.println("Location not found");
@@ -183,6 +184,6 @@ public class UserInformationController {
         catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return CO2message;
+        return null;
     }
 }
