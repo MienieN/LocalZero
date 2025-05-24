@@ -79,17 +79,20 @@ public class ActionController {
      * @throws SQLException if a database access error occurs
      */
     private void updateNeighbourhoodSavedCo2(String neighbourhoodName, int savedCo2) throws SQLException {
-        String sqlQuery = "";
-        int updatedCo2;
         ResultSet resultSet = getCurrentNeighbourhoodStats(neighbourhoodName);
-        resultSet.next();
-        updatedCo2 = resultSet.getInt("co2_saved") + savedCo2;
+        if (resultSet.next()) {
+            int updatedCo2 = resultSet.getInt("co2_saved") + savedCo2;
 
-        sqlQuery = "UPDATE neighbourhoods SET co2_saved = " + updatedCo2 + " WHERE name = '" + neighbourhoodName + "'";
+            String sqlQuery = "UPDATE neighbourhoods SET co2_saved = ? WHERE name = ?";
+            PreparedStatement statement = databaseConnection.getConnection().prepareStatement(sqlQuery);
+            statement.setInt(1, updatedCo2);
+            statement.setString(2, neighbourhoodName);
 
-        PreparedStatement statement = databaseConnection.getConnection().prepareStatement(sqlQuery);
-        databaseConnection.sendUpdate(statement);
-        System.out.println("does this happen?");
+            databaseConnection.sendUpdate(statement);
+            System.out.println("does this happen?");
+        } else {
+            System.out.println("Neighbourhood not found for update.");
+        }
     }
 
     /**
