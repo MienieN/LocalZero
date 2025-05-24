@@ -37,11 +37,12 @@ public class ConnectionControllerClient {
                 ((Message) object).displayMessage();
                 Terminal.getInstance().showMenu();
             }
+        }
 
-            if (object instanceof CommunityMessage) {
-                ArrayList<CommunityMessage> messages = controller.getFeedController().getMessages();
-                messages.add((CommunityMessage) object);
-            }
+        if (object instanceof CommunityMessage) {
+            ArrayList<CommunityMessage> messages = controller.getFeedController().getMessages();
+            messages.add((CommunityMessage) object);
+            System.out.println("DEBUG: Added new message to feed: " + object);
         }
         
         else if (object instanceof User){
