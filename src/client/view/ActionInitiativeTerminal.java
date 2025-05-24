@@ -1,7 +1,10 @@
 package client.view;
 
 import client.controller.Controller;
+import shared.IInitiative;
 import shared.InitiativeCategory;
+import shared.MessageType;
+
 import java.util.Scanner;
 
 public class ActionInitiativeTerminal {
@@ -86,7 +89,11 @@ public class ActionInitiativeTerminal {
         InitiativeCategory category = showInitiativeCategoryMenu();
         boolean isPublic = showVisibilityMenu();
 
-        controller.createInitiative(title, description, location, duration, category, isPublic);
+        IInitiative initiative = controller.createInitiative(title, description, location, duration, category, isPublic);
+
+        if (initiative.getIsPublic()) {
+            controller.createCommunityMessage(null, initiative.getDescription(), MessageType.NEW_INITIATIVE, initiative.getTitle());
+        }
 
         terminal.showMenu();
     }

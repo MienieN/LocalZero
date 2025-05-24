@@ -29,6 +29,7 @@ public class CommunityMessageTerminal {
         System.out.println("4. Show new initiatives");
         System.out.println("5. Send direct message");
         System.out.println("6. Send comment");
+        System.out.println("7. Give a like");
         System.out.println("0. Go back");
 
         int choice = scanner.nextInt();
@@ -56,6 +57,12 @@ public class CommunityMessageTerminal {
             case 5:
                 sendDirectMessageMenu();
                 break;
+            case 6:
+                sendCommentMenu();
+                break;
+            case 7:
+                giveLikeMenu();
+                break;
             default:
                 break;
         }
@@ -73,6 +80,35 @@ public class CommunityMessageTerminal {
         controller.createCommunityMessage(recipients, message, MessageType.DIRECT_MESSAGE, null);
     }
 
+    private void sendCommentMenu() {
+        System.out.println("Which post do you want to comment on?");
+
+        String[] postInfo = getRecipientAndOriginalPost();
+
+        ArrayList<String> recipients = new ArrayList<>();
+        recipients.add(postInfo[0]);
+        String originalPostTitle = postInfo[1];
+
+        System.out.println("Thank you. Please type your comment!");
+        String message = scanner.nextLine();
+
+        controller.createCommunityMessage(recipients, message, MessageType.COMMENT, originalPostTitle);
+    }
+
+    private void giveLikeMenu() {
+        System.out.println("Which post do you want to like?");
+
+        String[] postInfo = getRecipientAndOriginalPost();
+
+        ArrayList<String> recipients = new ArrayList<>();
+        recipients.add(postInfo[0]);
+        String originalPostTitle = postInfo[1];
+
+        System.out.println("Thank you for the like!");
+
+        controller.createCommunityMessage(recipients, null, MessageType.LIKE, originalPostTitle);
+    }
+
     private ArrayList<String> getRecipients() {
         System.out.println("Press enter after every name, enter 0 when done.\n" +
                 "Warning: case sensitive!");
@@ -85,8 +121,8 @@ public class CommunityMessageTerminal {
         return recipients;
     }
 
-    private void sendCommentMenu() {
-        System.out.println("Which post do you want to comment on?");
+    private String[] getRecipientAndOriginalPost() {
+        String[] recipientAndOriginalPost = new String[2];
 
         ActionInitiativeStorage storage = feedController.getStorage();
         List<ActionAbstract> actionList = storage.getLatestActions(10);
@@ -105,18 +141,10 @@ public class CommunityMessageTerminal {
             originalPostTitle = initiativeList.get(index).toString();
             recipient = initiativeList.get(index).getUsername();
         }
+        recipientAndOriginalPost[0] = recipient;
+        recipientAndOriginalPost[1] = originalPostTitle;
 
-        ArrayList<String> recipients = new ArrayList<>();
-        recipients.add(recipient);
-
-        System.out.println("Thank you. Please type your comment!");
-        String message = scanner.nextLine();
-
-        controller.createCommunityMessage(recipients, message, MessageType.COMMENT, originalPostTitle);
-    }
-
-    private String[] getRecipientAndOriginalPost() {
-
+        return recipientAndOriginalPost;
     }
 
     private int[] getOriginalPostArrayAndIndex(List<ActionAbstract> actionList, List<IInitiative> initiativeList) {
