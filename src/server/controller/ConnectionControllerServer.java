@@ -2,6 +2,7 @@ package server.controller;
 
 import server.model.ConnectionHandler;
 import shared.Action;
+import shared.ActionAbstract;
 import shared.IsAdminStatus;
 
 import java.net.Socket;
@@ -19,11 +20,11 @@ public class ConnectionControllerServer {
         new ConnectionHandler(socket, this, userLoginController);
     }
 
-    public void endHandler(ConnectionHandler connectionHandler) {
+    public synchronized void endHandler(ConnectionHandler connectionHandler) {
         connectedUsers.remove(connectionHandler.getUserName());
     }
 
-    public void addHandler(ConnectionHandler connectionHandler) {
+    public synchronized void addHandler(ConnectionHandler connectionHandler) {
         connectedUsers.put(connectionHandler.getUserName(), connectionHandler);
     }
 
@@ -35,7 +36,7 @@ public class ConnectionControllerServer {
         this.actionController = actionController;
     }
 
-    public void doAction(Action object) {
+    public synchronized void doAction(ActionAbstract object) {
         try {
             actionController.doAction(object);
         } catch (SQLException e) {

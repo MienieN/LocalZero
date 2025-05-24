@@ -62,8 +62,8 @@ public class ConnectionHandler extends Thread {
             serverReceivesRegistration((Registration) object);
         }
         // TODO: create a serverReceivesAction ... for future development
-        else if (object instanceof Action) {
-            connectionControllerServer.doAction((Action) object);
+        else if (object instanceof ActionAbstract) {
+            connectionControllerServer.doAction((ActionAbstract) object);
         }
         else if (object instanceof IsAdminStatus){
             userInformationController.alterAdminStatus((IsAdminStatus) object);

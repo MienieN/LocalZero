@@ -2,6 +2,7 @@ package server.controller;
 
 import server.view.DatabaseConnection;
 import shared.Action;
+import shared.ActionAbstract;
 import shared.Biking;
 
 import java.sql.PreparedStatement;
@@ -23,7 +24,7 @@ public class ActionController {
      * @param object the Action object containing the CO2 saved.
      * @throws SQLException if a database access error occurs
      */
-    public void doAction(Action object) throws SQLException {
+    public void doAction(ActionAbstract object) throws SQLException {
         String neighbourhoodName = object.getLocation();
         int actionSavedCO2 = object.getSavedCo2();
 
@@ -44,9 +45,8 @@ public class ActionController {
         try {
             PreparedStatement statement = databaseConnection.getConnection().prepareStatement(stringQuery);
             ResultSet resultSet = databaseConnection.sendQuery(statement);
-            int i = 1;
             while (resultSet.next()){
-                if (neighbourhoodName.equals(resultSet.getString(i++))){
+                if (neighbourhoodName.equals(resultSet.getString("name"))){
                     return true;
                 }
             }
@@ -89,6 +89,7 @@ public class ActionController {
 
         PreparedStatement statement = databaseConnection.getConnection().prepareStatement(sqlQuery);
         databaseConnection.sendUpdate(statement);
+        System.out.println("does this happen?");
     }
 
     /**

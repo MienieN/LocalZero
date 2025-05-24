@@ -14,7 +14,7 @@ public class DatabaseConnection {
     private Connection connection; // The active database connection.
     private static DatabaseConnection instance = null;
 
-    public static DatabaseConnection getInstance() {
+    public static synchronized DatabaseConnection getInstance() {
         if (instance == null){
             instance = new DatabaseConnection();
         }

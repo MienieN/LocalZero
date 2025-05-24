@@ -24,7 +24,7 @@ public class UserInformationController {
      
      @throws SQLException if a database access error occurs
      */
-    public User loginUser (Login login){
+    public synchronized User loginUser (Login login){
         String username = login.getUsername();
         String password = login.getPassword();
         
@@ -49,7 +49,7 @@ public class UserInformationController {
      
      @return a {@link ResultSet} containing the user data if found, or {@code null} if not found or an error occurs
      */
-    public ResultSet getUserForLogin (String username, String rawPassword) {
+    public synchronized ResultSet getUserForLogin (String username, String rawPassword) {
         try {
             PreparedStatement statement = databaseConnection.getConnection().prepareStatement(
                     "SELECT * FROM users " +
@@ -76,7 +76,7 @@ public class UserInformationController {
         }
     }
     
-    public IMessage registerUser (String username, String password, String email, String location, String role, boolean isAdmin) {
+    public synchronized IMessage registerUser (String username, String password, String email, String location, String role, boolean isAdmin) {
         IMessage message = new Message();
         
         try {
@@ -119,7 +119,7 @@ public class UserInformationController {
         return this;
     }
     
-    public void alterAdminStatus (IsAdminStatus object) {
+    public synchronized void alterAdminStatus (IsAdminStatus object) {
         boolean isAdmin = object.isAdmin();
         String username = object.getUsername();
         
@@ -141,7 +141,7 @@ public class UserInformationController {
         
     }
     
-    public void alterUserRole (RoleStatus object) {
+    public synchronized void alterUserRole (RoleStatus object) {
         String username = object.getUsername();
         String role = object.getRole();
         
@@ -164,7 +164,7 @@ public class UserInformationController {
         }
     }
 
-    public IMessage showCO2StatusForLocation(CO2Status object) {
+    public synchronized IMessage showCO2StatusForLocation(CO2Status object) {
         String location = object.getLocation();
 
         try {
