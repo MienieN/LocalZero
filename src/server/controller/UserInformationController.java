@@ -110,12 +110,10 @@ public class UserInformationController {
     /**
      Sets the database connection.
      
-     @param databaseConnection the {@link DatabaseConnection} to use
-     
      @return this controller instance
      */
-    public UserInformationController setDatabaseConnection (DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public UserInformationController setDatabaseConnection () {
+        this.databaseConnection = DatabaseConnection.getInstance();
         return this;
     }
     

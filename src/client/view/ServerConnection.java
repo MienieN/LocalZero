@@ -15,16 +15,16 @@ public class ServerConnection extends Thread{
     private ConnectionControllerClient connectionControllerClient;
     private static ServerConnection instance;
 
-    public static ServerConnection getInstance(String ipAddress, int port){
+    public static ServerConnection getInstance(){
         if(instance == null){
-            instance = new ServerConnection(ipAddress, port);
+            instance = new ServerConnection();
         }
         return instance;
     }
     
-    public ServerConnection(String ipAddress, int port) {
+    public ServerConnection() {
         try {
-            socket = new Socket(ipAddress, port);
+            socket = new Socket("127.0.0.1", 741);
 
             oos = new ObjectOutputStream(socket.getOutputStream());
         } catch (IOException e) {

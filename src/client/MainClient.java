@@ -9,16 +9,16 @@ public class MainClient {
     public static void main(String[] args) {
         Terminal terminal = Terminal.getInstance();
         
-        ServerConnection serverConnection = ServerConnection.getInstance("127.0.01", 741);
+        ServerConnection serverConnection = ServerConnection.getInstance();
         ConnectionControllerClient connectionControllerClient = ConnectionControllerClient.getInstance();
         
         Controller controller = new Controller();
         
-        connectionControllerClient.setServerConnection(serverConnection);
+        connectionControllerClient.setServerConnection();
         connectionControllerClient.setController(controller);
         
         serverConnection.setConnectionControllerClient(connectionControllerClient);
-        controller.setTerminal(terminal);
+        controller.setTerminal();
         controller.setConnectionController(connectionControllerClient);
         controller.setFeedController();
         

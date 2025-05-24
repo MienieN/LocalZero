@@ -45,8 +45,8 @@ public class ConnectionControllerClient {
         serverConnection.sendObject(object);
     }
 
-    public void setServerConnection(ServerConnection serverConnection) {
-        this.serverConnection = serverConnection;
+    public void setServerConnection() {
+        this.serverConnection = ServerConnection.getInstance();
     }
     
     public void setController (Controller controller) {

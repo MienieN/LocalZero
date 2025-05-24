@@ -14,11 +14,10 @@ public class MainServer {
         ConnectionControllerServer connectionControllerServer = new ConnectionControllerServer();
         UserInformationController userInformationController = new UserInformationController();
         ActionController actionController = new ActionController();
+
+        userInformationController.setDatabaseConnection();
         
-        DatabaseConnection databaseConnection = DatabaseConnection.getInstance();
-        userInformationController.setDatabaseConnection(databaseConnection);
-        
-        actionController.setDatabaseConnection(databaseConnection);
+        actionController.setDatabaseConnection();
         connectionControllerServer.setActionController(actionController);
         connectionControllerServer.setUserLoginController(userInformationController);
 

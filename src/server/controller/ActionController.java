@@ -13,8 +13,8 @@ import java.sql.Statement;
 public class ActionController {
     private DatabaseConnection databaseConnection;
 
-    public void setDatabaseConnection(DatabaseConnection databaseConnection) {
-        this.databaseConnection = databaseConnection;
+    public void setDatabaseConnection() {
+        this.databaseConnection = DatabaseConnection.getInstance();
     }
 
     /**
