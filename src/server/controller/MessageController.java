@@ -28,16 +28,23 @@ public class MessageController implements IMessageController{
                     System.err.println("Failed to send to " + user.getKey() + ": " + e.getMessage());
                 }
             }
-        } else {
+        }
+        else {
             for (String recipient : recipients) {
                 ConnectionHandler handler = users.get(recipient);
+                
+                System.out.println(recipient);
+                System.out.println(handler);
+                
                 if (handler != null) {
                     try {
                         handler.serverSendsObject(message);
                     } catch (IOException e) {
                         System.err.println("Failed to send to " + recipient + ", " + e.getMessage());
                     }
-                } else {
+                }
+                
+                else {
                     System.out.println("Recipient is not connected: " + recipient);
                 }
             }

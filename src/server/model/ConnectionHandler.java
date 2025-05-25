@@ -85,6 +85,7 @@ public class ConnectionHandler extends Thread {
     
     private void serverReceivesLogin(Login login) throws IOException {
         if (userInformationController.loginUser(login) != null){
+            setUsername(login.getUsername());
             
             User user = userInformationController.loginUser(login);
             connectionControllerServer.addHandler(this);
@@ -124,5 +125,9 @@ public class ConnectionHandler extends Thread {
 
     public String getUserName() {
         return this.username;
+    }
+    
+    public void setUsername (String username) {
+        this.username = username;
     }
 }

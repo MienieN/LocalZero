@@ -71,7 +71,7 @@ public class CommunityMessageTerminal {
 
     //TODO: Might need to handle scanner differently
     private void sendDirectMessageMenu() {
-        System.out.println("Which users do you want to send a message to?");
+        System.out.println("Which user do you want to send a message to?");
         ArrayList<String> recipients = getRecipients();
 
         System.out.println("Thank you. Please type your message!");
@@ -205,14 +205,13 @@ public class CommunityMessageTerminal {
     }
 
     private ArrayList<String> getRecipients() {
-        System.out.println("Press enter after every name, enter 0 when done.\n" +
-                "Warning: case sensitive!");
+        System.out.println("Warning: case sensitive!");
         ArrayList<String> recipients = new ArrayList<>();
         String recipient;
-        do {
+        
             recipient = scanner.nextLine();
             recipients.add(recipient);
-        } while (!recipient.equals("0"));
+       
         return recipients;
     }
 }

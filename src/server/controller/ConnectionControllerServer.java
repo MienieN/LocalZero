@@ -27,6 +27,7 @@ public class ConnectionControllerServer {
 
     public synchronized void addHandler(ConnectionHandler connectionHandler) {
         connectedUsers.put(connectionHandler.getUserName(), connectionHandler);
+        System.out.println(connectedUsers);
     }
 
     public void setUserLoginController(UserInformationController userLoginController) {
